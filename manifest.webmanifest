@@ -1,6 +1,6 @@
 {
   "name": "El Harmawy Business Consultancy",
-  "short_name": "HBC",
+  "short_name": "El Harmawy",
   "description": "Business setup, PRO, consultancy, HR, procurement and marketing in the UAE. We Handle It, You Grow.",
   "id": "/",
   "start_url": "/?source=app",
@@ -11,14 +11,63 @@
   "theme_color": "#011F43",
   "lang": "en",
   "dir": "auto",
-  "categories": ["business", "productivity"],
+  "categories": [
+    "business",
+    "productivity"
+  ],
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "shortcuts": [
-    { "name": "Get a free quote / اطلب عرض سعر", "short_name": "Quote", "url": "/?source=app#register", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Our services / خدماتنا", "short_name": "Services", "url": "/?source=app#services", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+    {
+      "name": "Get a Free Quote",
+      "short_name": "Free Quote",
+      "url": "/?source=app#register",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Our Services",
+      "short_name": "Services",
+      "url": "/?source=app#services",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Ask HBC Assistant",
+      "short_name": "Ask HBC",
+      "url": "/?source=app#ask",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

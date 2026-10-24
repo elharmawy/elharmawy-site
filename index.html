@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="HBC">
+<meta name="apple-mobile-web-app-title" content="El Harmawy">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="canonical" href="https://www.elharmawy.com/">
 <meta property="og:type" content="website">
@@ -520,7 +520,7 @@
   function ar(){ return site && site.getAttribute('dir')==='rtl'; }
   function add(role,text){ var d=document.createElement('div'); d.className='ai-msg '+role; d.textContent=text; log.appendChild(d); log.scrollTop=log.scrollHeight; return d; }
   function save(){ try{ sessionStorage.setItem('hbcChat', JSON.stringify(hist.slice(-12))); }catch(e){} }
-  fetch('/api/chat').then(function(r){ return r.ok?r.json():{}; }).then(function(j){ if(j&&j.ok) fab.hidden=false; }).catch(function(){});
+  fetch('/api/chat').then(function(r){ return r.ok?r.json():{}; }).then(function(j){ if(j&&j.ok){ fab.hidden=false; if(location.hash==='#ask') open(true); } }).catch(function(){});
   function open(o){ box.hidden=!o; fab.setAttribute('aria-expanded',o); if(o){ if(!log.childElementCount){ if(hist.length){ hist.forEach(function(m){ add(m.role==='user'?'me':'bot', m.content); }); } else add('bot', ar()?'أهلاً بيك! أنا مساعد الهرماوي. تحب تسأل عن تأسيس شركة، خدمات المندوب، ولا حاجة تانية؟':'Hi! I\'m the El Harmawy assistant. Ask me about company setup, PRO services or anything else we do.'); } inp.focus(); } }
   fab.addEventListener('click',function(){ open(box.hidden); });
   document.getElementById('aiX').addEventListener('click',function(){ open(false); });
@@ -549,7 +549,7 @@
       <span class="pay-note"><span data-l="en">Pay by card, or split your payment with Tabby or Tamara.</span><span data-l="ar">ادفع بالبطاقة أو قسّط مع تابي أو تمارا.</span></span>
     </div>
     <div class="app-get" id="appGet" hidden>
-      <button type="button" class="app-btn" id="appBtn"><img src="icons/icon-192.png" alt="" width="28" height="28"><span data-l="en">Get the HBC app</span><span data-l="ar">نزّل تطبيق الهرماوي</span></button>
+      <button type="button" class="app-btn" id="appBtn"><img src="icons/icon-192.png" alt="" width="28" height="28"><span class="app-t"><b>El Harmawy App</b><small>Install on your phone</small></span></button>
       <p class="app-ios" id="appIos" hidden><span data-l="en">On iPhone: tap the Share button, then “Add to Home Screen”.</span><span data-l="ar">على الآيفون: دوس زرار المشاركة وبعدين «إضافة إلى الشاشة الرئيسية».</span></p>
     </div>
     <div class="links">

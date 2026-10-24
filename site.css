@@ -396,3 +396,7 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .app-btn img { border-radius: 7px; }
 .app-btn:hover { background: rgba(255,255,255,.12); }
 .app-ios { margin: 0; font-size: 13.5px; opacity: .85; }
+.app-t { display: flex; flex-direction: column; line-height: 1.2; text-align: start; }
+.app-t b { font-family: "Red Hat Display", sans-serif; font-size: 15px; letter-spacing: .2px; }
+.app-t small { font-size: 12px; font-weight: 500; opacity: .75; }
+.app-btn img { width: 36px; height: 36px; }
