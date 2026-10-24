@@ -33,7 +33,7 @@ const headers = { "Content-Type": "application/json", "Cache-Control": "no-store
 export default async (req) => {
   if (req.method === "GET") {
     const k = (process.env.ANTHROPIC_API_KEY || "").trim();
-    return new Response(JSON.stringify({ ok: !!k, kind: k.slice(0, 10), len: k.length }), { headers });
+    return new Response(JSON.stringify({ ok: !!k }), { headers });
   }
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
   const key = (process.env.ANTHROPIC_API_KEY || "").replace(/\s+/g, "");
@@ -54,7 +54,7 @@ export default async (req) => {
     if (r.status === 401) r = await call({ "Authorization": "Bearer " + key });
     const j = await r.json();
     if (!r.ok) return new Response(JSON.stringify({ error: "upstream", detail: j?.error?.type || r.status, msg: (j?.error?.message || "").slice(0, 200) }), { status: 502, headers });
-    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").trim();
+    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#+\s*/gm, "").replace(/^\s*[-*]\s+/gm, "• ").trim();
     return new Response(JSON.stringify({ reply: text }), { headers });
   } catch (e) {
     return new Response(JSON.stringify({ error: "network" }), { status: 502, headers });
