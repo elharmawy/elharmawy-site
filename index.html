@@ -6,6 +6,12 @@
 <title>El Harmawy Business Consultancy</title>
 <meta name="description" content="El Harmawy Business Consultancy F.Z.E — business, HR, procurement and marketing consultancy, e-commerce store set-up and sourcing from China. Ajman Free Zone, UAE. We Handle It, You Grow.">
 <link rel="icon" href="favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HBC">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="canonical" href="https://www.elharmawy.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="El Harmawy Business Consultancy">
@@ -542,6 +548,10 @@
       <span class="chip">Tamara</span>
       <span class="pay-note"><span data-l="en">Pay by card, or split your payment with Tabby or Tamara.</span><span data-l="ar">ادفع بالبطاقة أو قسّط مع تابي أو تمارا.</span></span>
     </div>
+    <div class="app-get" id="appGet" hidden>
+      <button type="button" class="app-btn" id="appBtn"><img src="icons/icon-192.png" alt="" width="28" height="28"><span data-l="en">Get the HBC app</span><span data-l="ar">نزّل تطبيق الهرماوي</span></button>
+      <p class="app-ios" id="appIos" hidden><span data-l="en">On iPhone: tap the Share button, then “Add to Home Screen”.</span><span data-l="ar">على الآيفون: دوس زرار المشاركة وبعدين «إضافة إلى الشاشة الرئيسية».</span></p>
+    </div>
     <div class="links">
       <a href="terms.html"><span data-l="en">Terms &amp; Conditions</span><span data-l="ar">الشروط والأحكام</span></a>
       <a href="refund.html"><span data-l="en">Refund &amp; Cancellation Policy</span><span data-l="ar">سياسة الاسترجاع والإلغاء</span></a>
@@ -701,5 +711,21 @@ document.querySelectorAll('.vframe').forEach(function(f){
 });
 </script>
 
+<script>
+(function(){
+  if('serviceWorker' in navigator){ window.addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+  var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if(standalone) return;
+  var box=document.getElementById('appGet'), btn=document.getElementById('appBtn'), ios=document.getElementById('appIos'), deferred=null;
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferred=e; box.hidden=false; });
+  if(isIOS){ box.hidden=false; }
+  btn.addEventListener('click',function(){
+    if(deferred){ deferred.prompt(); deferred.userChoice.finally(function(){ deferred=null; box.hidden=true; }); }
+    else if(isIOS){ ios.hidden=!ios.hidden; }
+  });
+  window.addEventListener('appinstalled',function(){ box.hidden=true; });
+})();
+</script>
 </body>
 </html>
