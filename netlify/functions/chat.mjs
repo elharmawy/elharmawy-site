@@ -31,9 +31,12 @@ Rules:
 const headers = { "Content-Type": "application/json", "Cache-Control": "no-store" };
 
 export default async (req) => {
-  if (req.method === "GET") return new Response(JSON.stringify({ ok: !!process.env.ANTHROPIC_API_KEY }), { headers });
+  if (req.method === "GET") {
+    const k = (process.env.ANTHROPIC_API_KEY || "").trim();
+    return new Response(JSON.stringify({ ok: !!k, kind: k.slice(0, 10), len: k.length }), { headers });
+  }
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = (process.env.ANTHROPIC_API_KEY || "").replace(/\s+/g, "");
   if (!key) return new Response(JSON.stringify({ error: "not_configured" }), { status: 503, headers });
   let body;
   try { body = await req.json(); } catch { return new Response(JSON.stringify({ error: "bad_json" }), { status: 400, headers }); }
@@ -44,13 +47,13 @@ export default async (req) => {
   if (!msgs.length || msgs[msgs.length - 1].role !== "user") return new Response(JSON.stringify({ error: "no_message" }), { status: 400, headers });
   while (msgs.length && msgs[0].role !== "user") msgs.shift();
   try {
-    const r = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-      body: JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM, messages: msgs })
-    });
+    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM, messages: msgs });
+    const base = { "anthropic-version": "2023-06-01", "content-type": "application/json" };
+    const call = (auth) => fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { ...base, ...auth }, body: payload });
+    let r = await call({ "x-api-key": key });
+    if (r.status === 401) r = await call({ "Authorization": "Bearer " + key });
     const j = await r.json();
-    if (!r.ok) return new Response(JSON.stringify({ error: "upstream", detail: j?.error?.type || r.status }), { status: 502, headers });
+    if (!r.ok) return new Response(JSON.stringify({ error: "upstream", detail: j?.error?.type || r.status, msg: (j?.error?.message || "").slice(0, 200) }), { status: 502, headers });
     const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").trim();
     return new Response(JSON.stringify({ reply: text }), { headers });
   } catch (e) {
