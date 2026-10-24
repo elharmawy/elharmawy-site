@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>El Harmawy Business Consultancy</title>
 <meta name="description" content="El Harmawy Business Consultancy F.Z.E — business, HR, procurement and marketing consultancy, e-commerce store set-up and sourcing from China. Ajman Free Zone, UAE. We Handle It, You Grow.">
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M1BHSYLT4R"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+var hbcApp=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+gtag('config','G-M1BHSYLT4R',{opened_from:hbcApp?'app':'browser'});
+window.hbcTrack=function(n,p){try{gtag('event',n,p||{});}catch(e){}};
+</script>
 <link rel="icon" href="favicon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -683,11 +692,13 @@
     if (!document.getElementById('f-consent').checked) { say('Please tick the consent box so we can contact you.', 'من فضلك وافق على التواصل حتى نتمكن من الرد عليك.'); return; }
     var live = /(netlify\.app|elharmawy\.com)$/.test(location.hostname);
     if (!live) { say('Preview only: the form will send once the site is live on elharmawy.com.', 'هذه معاينة فقط: سيعمل النموذج بعد نشر الموقع على elharmawy.com.'); return; }
+    hbcTrack('quote_submit_click', { service: svcSel.value });
     var btn = document.getElementById('f-submit'); btn.disabled = true;
     var data = new URLSearchParams(new FormData(form)).toString();
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data })
       .then(function (r) {
         if (!r.ok) throw new Error(r.status);
+        hbcTrack('generate_lead', { service: svcSel.value || 'n/a', currency: 'AED' });
         form.reset();
         say('Thank you! We received your request and will send your quote soon. For a faster reply, message us on WhatsApp.', 'شكرًا لك! وصلنا طلبك وهنبعتلك عرض السعر قريبًا. وللرد الأسرع راسلنا على واتساب.', true);
         var wa = document.createElement('a'); wa.className = 'btn btn-gold'; wa.target = '_blank'; wa.rel = 'noopener';
@@ -725,6 +736,26 @@ document.querySelectorAll('.vframe').forEach(function(f){
     else if(isIOS){ ios.hidden=!ios.hidden; }
   });
   window.addEventListener('appinstalled',function(){ box.hidden=true; });
+})();
+</script>
+<script>
+/* Analytics events: who started the quote form, WhatsApp/email clicks, assistant use, videos, app installs */
+(function(){
+  var f=document.getElementById('leadForm'), started=false;
+  if(f) f.addEventListener('input',function(){ if(!started){ started=true; hbcTrack('quote_form_start'); } });
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a,button'); if(!a) return;
+    var h=a.getAttribute('href')||'';
+    if(/wa\.me|whatsapp/i.test(h)) hbcTrack('whatsapp_click',{place:(a.className||a.id||'link').toString().slice(0,40)});
+    else if(/^mailto:/i.test(h)) hbcTrack('email_click');
+    else if(/^tel:/i.test(h)) hbcTrack('phone_click');
+    else if(a.id==='aiFab') hbcTrack('assistant_open');
+    else if(a.id==='appBtn') hbcTrack('app_install_click');
+    else if(a.classList.contains('promo-btn')) hbcTrack('start_business_click');
+  },true);
+  var aiForm=document.getElementById('aiForm'); if(aiForm) aiForm.addEventListener('submit',function(){ hbcTrack('assistant_message'); },true);
+  document.addEventListener('play',function(e){ if(e.target.tagName==='VIDEO'){ var s=(e.target.currentSrc||'').split('/').pop(); hbcTrack('video_play',{video:s}); } },true);
+  window.addEventListener('appinstalled',function(){ hbcTrack('app_installed'); });
 })();
 </script>
 </body>
