@@ -475,3 +475,16 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 @media (max-width: 1080px) { .nav a[href="#solutions"], .nav a[href="#videos"] { display: none; } }
 .pk-ex { margin: 0; font-size: 12.5px; color: var(--muted); border-inline-start: 2px solid var(--gold); padding-inline-start: 10px; }
 .vcond { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 500; color: var(--muted); }
+
+/* setup cost calculator */
+.setupcalc { background: var(--paper); }
+.calc-form select { font: 600 16px var(--f-body); color: var(--ink); background: #fff; border: 1px solid #C7D0DC; border-radius: 8px; padding: 12px 14px; min-height: 48px; width: 100%; }
+.site[dir="rtl"] .calc-form select { font-family: var(--f-ar); }
+.calc-form .sc-check { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+.calc-form .sc-check input { width: 20px; height: 20px; min-height: 0; padding: 0; accent-color: var(--navy); }
+.calc-form .sc-check input:disabled + span { opacity: .45; }
+.calc-form select:disabled { opacity: .5; }
+.sc-what { margin: 0; font-size: 14px; color: var(--muted); border-inline-start: 3px solid var(--gold); padding-inline-start: 10px; }
+.sc-inc { margin: 0; font-size: 13px; color: var(--on-navy-muted); }
+.sc-form-link { color: var(--gold); font-weight: 600; font-size: 14.5px; }
+.sc-fine { margin: 0; font-size: 12px; color: var(--on-navy-muted); opacity: .85; }
