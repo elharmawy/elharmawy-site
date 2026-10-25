@@ -204,45 +204,63 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
 
 
   <section class="block calc setupcalc" id="setup-cost">
-    <div class="wrap calc-grid">
-      <div>
+    <div class="wrap">
+      <div class="head">
         <div class="eyebrow"><span data-l="en">Setup cost calculator</span><span data-l="ar">حاسبة تكلفة التأسيس</span></div>
         <h2><span data-l="en">How much does your free zone company cost?</span><span data-l="ar">شركتك في المنطقة الحرة… بكام؟</span></h2>
-        <p class="calc-intro"><span data-l="en">Choose the free zone, licence type and number of visas to see an estimated price for one year.</span><span data-l="ar">اختار المنطقة الحرة ونوع الرخصة وعدد الإقامات وشوف السعر التقريبي لمدة سنة.</span></p>
-        <form class="calc-form" id="sc-form" onsubmit="return false">
-          <label for="sc-zone"><span data-l="en">Free zone</span><span data-l="ar">المنطقة الحرة</span>
-            <select id="sc-zone"><option value="afz">Ajman Free Zone</option><option value="shams">Sharjah SHAMS</option></select></label>
-          <div id="sc-afz">
-          <label for="sc-type"><span data-l="en">Licence type</span><span data-l="ar">نوع الرخصة</span>
-            <select id="sc-type">
-              <option value="virtual">Virtual office (co-working) — مكتب افتراضي</option>
-              <option value="physical">Physical office, Al Jurf — مكتب فعلي في الجرف</option>
-              <option value="freelancer">Freelancer permit — تصريح عمل حر</option>
-              <option value="light">AFZ Light (B2B, up to 3 activities) — AFZ لايت</option>
-            </select></label>
-          <div class="row2">
-            <label for="sc-visas"><span data-l="en">Number of visas</span><span data-l="ar">عدد الإقامات</span><select id="sc-visas"></select></label>
-            <label for="sc-extra"><span data-l="en">Extra activities</span><span data-l="ar">أنشطة إضافية</span><select id="sc-extra"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
-          </div>
-          <label class="sc-check" for="sc-gt"><input type="checkbox" id="sc-gt"> <span><span data-l="en">General trading activity (+ AED 2,000)</span><span data-l="ar">نشاط تجارة عامة (+ 2,000 درهم)</span></span></label>
-          </div>
-          <label class="sc-check" for="sc-dxb"><input type="checkbox" id="sc-dxb"> <span><span data-l="en">Dubai medical test (+ AED 105 per visa, optional)</span><span data-l="ar">الكشف الطبي في دبي (+ 105 درهم لكل إقامة، اختياري)</span></span></label>
-          <p class="sc-what" id="sc-what"></p>
-        </form>
+        <p class="calc-intro"><span data-l="en">Four quick steps and you get an estimated setup cost for Ajman Free Zone, Sharjah SHAMS or Meydan Free Zone Dubai.</span><span data-l="ar">أربع خطوات سريعة وتعرف التكلفة التقريبية لتأسيس شركتك في منطقة عجمان الحرة أو شمس الشارقة أو منطقة ميدان الحرة في دبي.</span></p>
       </div>
-      <div class="calc-out" aria-live="polite">
-        <span class="k"><span data-l="en">Estimated package price, 1 year</span><span data-l="ar">السعر التقريبي للباقة، سنة واحدة</span></span>
-        <span class="big"><small style="font-size:.45em;color:var(--gold)">AED</small> <span id="sc-total">0</span></span>
-        <dl>
-          <div><dt><span data-l="en">Package</span><span data-l="ar">الباقة</span></dt><dd id="sc-base">0</dd></div>
-          <div><dt><span data-l="en">General trading</span><span data-l="ar">تجارة عامة</span></dt><dd id="sc-gtv">0</dd></div>
-          <div><dt><span data-l="en">Extra activities</span><span data-l="ar">أنشطة إضافية</span></dt><dd id="sc-exv">0</dd></div>
-          <div><dt><span data-l="en">Dubai medical test</span><span data-l="ar">الكشف الطبي في دبي</span></dt><dd id="sc-dxv">0</dd></div>
-        </dl>
-        <p class="sc-inc"><span data-l="en">Visa packages include establishment card, eChannel, security approval, residency visa, medical test, Emirates ID and status change. Health insurance for visa holders is mandatory and not included.</span><span data-l="ar">باقات الإقامة بتشمل بطاقة المنشأة، والإي تشانل، والموافقة الأمنية، والإقامة، والكشف الطبي، والهوية، وتعديل الوضع. التأمين الصحي إلزامي لأصحاب الإقامات ومش داخل في السعر.</span></p>
-        <a class="btn btn-gold" id="sc-wa" href="https://wa.me/971563469000" target="_blank" rel="noopener"><span data-l="en">Send me this quote on WhatsApp</span><span data-l="ar">ابعتلي العرض ده على واتساب</span></a>
-        <a class="sc-form-link promo-btn" href="#register" data-service="Business setup / company formation"><span data-l="en">Or request a written quote</span><span data-l="ar">أو اطلب عرض سعر مكتوب</span></a>
-        <p class="sc-fine"><span data-l="en">Prices are based on the free zones' 2026 packages and may change. Your final price is confirmed in a written quote.</span><span data-l="ar">الأسعار حسب باقات المناطق الحرة 2026 وممكن تتغير. السعر النهائي بيتأكد في عرض سعر مكتوب.</span></p>
+      <div class="wiz" id="wiz">
+        <div class="wiz-top"><b id="wz-title"><span data-l="en">Your company</span><span data-l="ar">شركتك</span></b><div class="wiz-bar" aria-hidden="true"><i id="wz-bar"></i></div><span class="wiz-n"><span id="wz-n">1</span> / 4</span></div>
+        <form id="wz-form" novalidate>
+          <fieldset class="wz-step" data-step="1">
+            <legend class="sr"><span data-l="en">Step 1: your company</span><span data-l="ar">الخطوة 1: شركتك</span></legend>
+            <label for="sc-zone"><span data-l="en">Free zone</span><span data-l="ar">المنطقة الحرة</span><select id="sc-zone"><option value="afz"></option><option value="shams"></option><option value="meydan"></option></select></label>
+            <div id="sc-afz">
+              <label for="sc-type"><span data-l="en">Licence type</span><span data-l="ar">نوع الرخصة</span><select id="sc-type"><option value="virtual"></option><option value="physical"></option><option value="freelancer"></option><option value="light"></option></select></label>
+              <p class="sc-what" id="sc-what"></p>
+            </div>
+            <p class="sc-what" id="sc-zone-note" hidden></p>
+            <div class="row2">
+              <label for="sc-visas"><span data-l="en">Number of visas</span><span data-l="ar">عدد الإقامات</span><select id="sc-visas"></select></label>
+              <label for="sc-extra" id="sc-extra-l"><span data-l="en">Extra activities</span><span data-l="ar">أنشطة إضافية</span><select id="sc-extra"><option>0</option><option>1</option><option>2</option><option>3</option></select></label>
+            </div>
+            <label class="sc-check" for="sc-gt" id="sc-gt-l"><input type="checkbox" id="sc-gt"> <span><span data-l="en">General trading activity (+ AED 2,000)</span><span data-l="ar">نشاط تجارة عامة (+ 2,000 درهم)</span></span></label>
+            <label class="sc-check" for="sc-dxb" id="sc-dxb-l"><input type="checkbox" id="sc-dxb"> <span><span data-l="en">Dubai medical test (+ AED 105 per visa, optional)</span><span data-l="ar">الكشف الطبي في دبي (+ 105 درهم لكل إقامة، اختياري)</span></span></label>
+          </fieldset>
+          <fieldset class="wz-step" data-step="2" hidden>
+            <legend class="sr"><span data-l="en">Step 2: your business</span><span data-l="ar">الخطوة 2: نشاطك</span></legend>
+            <label for="wz-when"><span data-l="en">How soon do you want to start?</span><span data-l="ar">عايز تبدأ إمتى؟</span><select id="wz-when"><option value="Immediately"></option><option value="Within 1 month"></option><option value="1–3 months"></option><option value="Just exploring"></option></select></label>
+            <label for="wz-act"><span data-l="en">Business activity *</span><span data-l="ar">النشاط التجاري *</span><input id="wz-act" placeholder="e.g. General trading / تجارة عامة" autocomplete="off"></label>
+            <div class="row2">
+              <label for="wz-sh"><span data-l="en">Number of shareholders</span><span data-l="ar">عدد الشركاء</span><select id="wz-sh"><option>1</option><option>2</option><option>3</option><option>4–6</option><option>7–10</option></select></label>
+              <label for="wz-nat"><span data-l="en">Shareholders' nationalities</span><span data-l="ar">جنسيات الشركاء</span><input id="wz-nat" placeholder="e.g. Egyptian / مصري" autocomplete="off"></label>
+            </div>
+          </fieldset>
+          <fieldset class="wz-step" data-step="3" hidden>
+            <legend class="sr"><span data-l="en">Step 3: your details</span><span data-l="ar">الخطوة 3: بياناتك</span></legend>
+            <label for="wz-name"><span data-l="en">Full name *</span><span data-l="ar">الاسم الكامل *</span><input id="wz-name" autocomplete="name"></label>
+            <div class="row2">
+              <label for="wz-phone"><span data-l="en">Mobile / WhatsApp *</span><span data-l="ar">الموبايل / واتساب *</span><input id="wz-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+971 5x xxx xxxx" dir="ltr"></label>
+              <label for="wz-email"><span data-l="en">Email</span><span data-l="ar">البريد الإلكتروني</span><input id="wz-email" type="email" autocomplete="email" dir="ltr"></label>
+            </div>
+            <label class="sc-check" for="wz-ok"><input type="checkbox" id="wz-ok"> <span><span data-l="en">I agree that El Harmawy Business Consultancy may contact me about this estimate, as described in the <a href="privacy.html">Privacy Policy</a>.</span><span data-l="ar">أوافق إن الهرماوي لاستشارات الأعمال تتواصل معايا بخصوص التكلفة دي، حسب <a href="privacy.html">سياسة الخصوصية</a>.</span></span></label>
+          </fieldset>
+          <div class="wz-step wz-result" data-step="4" hidden aria-live="polite">
+            <span class="k"><span data-l="en">Your estimated setup cost, 1 year</span><span data-l="ar">التكلفة التقريبية لتأسيس شركتك، سنة واحدة</span></span>
+            <span class="big"><small id="sc-from"></small> <small class="cur">AED</small> <span id="sc-total">0</span></span>
+            <dl id="sc-lines"></dl>
+            <p class="sc-inc" id="sc-inc"></p>
+            <a class="btn btn-gold" id="sc-wa" href="https://wa.me/971563469000" target="_blank" rel="noopener"><span data-l="en">Get this quote on WhatsApp</span><span data-l="ar">استلم العرض على واتساب</span></a>
+            <p class="sc-fine"><span data-l="en">Thank you. We received your details and will contact you shortly. Prices are based on the free zones' 2026 packages and may change; your final price is confirmed in a written quote.</span><span data-l="ar">شكرًا! وصلتنا بياناتك وهنتواصل معاك قريب. الأسعار حسب باقات المناطق الحرة 2026 وممكن تتغير، والسعر النهائي بيتأكد في عرض سعر مكتوب.</span></p>
+            <button type="button" class="wz-again" id="wz-again"><span data-l="en">Start a new estimate</span><span data-l="ar">احسب تكلفة تانية</span></button>
+          </div>
+          <p class="form-msg err" id="wz-err" role="alert"></p>
+          <div class="wz-nav" id="wz-nav">
+            <button type="button" class="btn btn-line-navy" id="wz-prev" hidden><span data-l="en">Previous</span><span data-l="ar">السابق</span></button>
+            <button type="submit" class="btn btn-gold" id="wz-next"><span data-l="en">Next</span><span data-l="ar">التالي</span></button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -915,47 +933,74 @@ document.querySelectorAll('.vframe').forEach(function(f){
 })();
 </script>
 <script>
-/* Ajman Free Zone 2026 package prices (AED, 1 year). Source: AFZ 2026 all-inclusive packages sheet. */
+/* Setup cost wizard. Prices in AED for 1 year.
+   Ajman Free Zone: AFZ 2026 all-inclusive packages sheet. SHAMS: licence only from 5,700. Meydan FZ: licence fee 12,500 (visas extra). */
 (function(){
-  var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],
-         physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],
-         freelancer:[6010,12131],
-         light:[null,11000]};
-  var GT=2000, EXTRA=1000, DXB=105, SERVICE_FEE=0;
-  var W={virtual:['Up to 10 mixed activities · up to 10 shareholders · virtual office','حتى 10 أنشطة متنوعة · حتى 10 شركاء · مكتب افتراضي'],
-         physical:['Up to 10 mixed activities · up to 10 shareholders · office lease in Al Jurf','حتى 10 أنشطة متنوعة · حتى 10 شركاء · عقد مكتب في الجرف'],
-         freelancer:['1 professional activity · 1 freelancer · permit and lease agreement','نشاط مهني واحد · فريلانسر واحد · تصريح وعقد إيجار'],
-         light:['Up to 3 activities · up to 2 shareholders · virtual office · 1 visa · for B2B companies','حتى 3 أنشطة · حتى شريكين · مكتب افتراضي · إقامة واحدة · للشركات اللي بتتعامل مع شركات (B2B)']};
-  var $=function(i){return document.getElementById(i)}, site=$('site');
-  if(!$('sc-type')) return;
-  var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return n.toLocaleString('en-US')};
-  function fillVisas(){ var t=$('sc-type').value, cur=+$('sc-visas').value||1, sel=$('sc-visas'); sel.innerHTML='';
-    P[t].forEach(function(v,i){ if(v==null) return; var o=document.createElement('option'); o.value=i; o.textContent=i===0?(ar()?'0 (رخصة فقط)':'0 (licence only)'):i; sel.appendChild(o); });
-    var ok=[].some.call(sel.options,function(o){return +o.value===cur}); sel.value=ok?cur:sel.options[0].value; }
-  var SHAMS_LICENCE=5700;
-  function calc(){ var zone=$('sc-zone').value, isS=zone==='shams'; $('sc-afz').hidden=isS; $('sc-dxb').closest('label').hidden=isS;
-    if(isS){ $('sc-base').textContent=f(SHAMS_LICENCE); $('sc-gtv').textContent='0'; $('sc-exv').textContent='0'; $('sc-dxv').textContent='0'; $('sc-total').textContent=f(SHAMS_LICENCE);
-      $('sc-what').textContent=ar()?'شمس الشارقة: الرخصة فقط تبدأ من 5,700 درهم. الإقامات والإضافات بعرض سعر منفصل.':'Sharjah SHAMS: licence only, from AED 5,700. Visas and add-ons are quoted separately.';
-      $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent('Hello El Harmawy, I used the setup calculator: Sharjah SHAMS, licence only, from AED 5,700. Please send me the exact quote.');
-      var fo0=$('f-offer'); if(fo0) fo0.dataset.calc='SHAMS licence only / from AED 5,700'; return; }
-    var t=$('sc-type').value, v=+$('sc-visas').value, base=P[t][v]||0;
-    var allowGT=(t==='virtual'||t==='physical'); $('sc-gt').disabled=!allowGT; if(!allowGT) $('sc-gt').checked=false;
-    var allowEx=(t!=='freelancer'); $('sc-extra').disabled=!allowEx; if(!allowEx) $('sc-extra').value='0';
-    var gt=$('sc-gt').checked?GT:0, ex=(+$('sc-extra').value)*EXTRA, dx=$('sc-dxb').checked?DXB*v:0, tot=base+gt+ex+dx+SERVICE_FEE;
-    $('sc-base').textContent=f(base); $('sc-gtv').textContent=f(gt); $('sc-exv').textContent=f(ex); $('sc-dxv').textContent=f(dx); $('sc-total').textContent=f(tot);
-    $('sc-what').textContent=W[t][ar()?1:0];
-    var name=N[t][0];
-    var msg='Hello El Harmawy, I used the setup calculator: Ajman Free Zone, '+name+', '+v+' visa(s)'+(gt?', general trading':'')+(ex?', '+(ex/EXTRA)+' extra activit'+(ex/EXTRA>1?'ies':'y'):'')+(dx?', Dubai medical':'')+'. Estimated AED '+f(tot)+'. Please send me the exact quote.';
-    $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent(msg);
-    var fo=$('f-offer'); if(fo) fo.dataset.calc='AFZ '+name+' / '+v+' visa / AED '+f(tot); }
-  ['sc-zone','sc-type','sc-visas','sc-extra','sc-gt','sc-dxb'].forEach(function(id){ $(id).addEventListener('change',function(){ if(id==='sc-type') fillVisas(); calc(); try{ gtag('event','setup_calculator_use',{zone:$('sc-zone').value,licence:$('sc-type').value,visas:$('sc-visas').value}); }catch(e){} }); });
-  $('langBtn').addEventListener('click',function(){ setTimeout(calc,0); });
-  document.querySelector('.sc-form-link').addEventListener('click',function(){ var fo=$('f-offer'); if(fo&&fo.dataset.calc) fo.value=fo.dataset.calc; });
-  $('sc-wa').addEventListener('click',function(){ try{ gtag('event','setup_quote_whatsapp',{value:+$('sc-total').textContent.replace(/,/g,''),currency:'AED'}); }catch(e){} });
+  var $=function(i){return document.getElementById(i)}, site=$('site'); if(!$('wiz')) return;
+  var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return Math.round(n).toLocaleString('en-US')}, T=function(en,a){return ar()?a:en};
+  var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],freelancer:[6010,12131],light:[null,11000]};
+  var GT=2000, EXTRA=1000, DXB=105, SHAMS=5700, MEYDAN=12500;
+  var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي']};
   var N={virtual:['Virtual office (co-working)','مكتب افتراضي (مساحة عمل مشتركة)'],physical:['Physical office, Al Jurf','مكتب فعلي في الجرف'],freelancer:['Freelancer permit','تصريح عمل حر (فريلانسر)'],light:['AFZ Light (B2B)','AFZ لايت (للشركات B2B)']};
-  function names(){ [].forEach.call($('sc-type').options,function(o){ o.textContent=N[o.value][ar()?1:0]; o.dataset.en=N[o.value][0]; }); [].forEach.call($('sc-visas').options,function(o){ if(o.value==='0') o.textContent=ar()?'0 (رخصة فقط)':'0 (licence only)'; }); }
-  $('langBtn').addEventListener('click',function(){ setTimeout(names,0); });
-  fillVisas(); $('sc-visas').value='1'; names(); calc();
+  var W={virtual:['Up to 10 mixed activities · up to 10 shareholders · virtual office','حتى 10 أنشطة متنوعة · حتى 10 شركاء · مكتب افتراضي'],physical:['Up to 10 mixed activities · up to 10 shareholders · office lease in Al Jurf','حتى 10 أنشطة متنوعة · حتى 10 شركاء · عقد مكتب في الجرف'],freelancer:['1 professional activity · 1 freelancer · permit and lease agreement','نشاط مهني واحد · فريلانسر واحد · تصريح وعقد إيجار'],light:['Up to 3 activities · up to 2 shareholders · virtual office · 1 visa · for B2B companies','حتى 3 أنشطة · حتى شريكين · مكتب افتراضي · إقامة واحدة · للشركات B2B']};
+  var WHEN={'Immediately':'فورًا','Within 1 month':'خلال شهر','1–3 months':'من شهر لـ 3 شهور','Just exploring':'بستكشف بس'};
+  var ZN={shams:['Licence only, from AED 5,700. Visas and add-ons are quoted separately.','الرخصة فقط تبدأ من 5,700 درهم. الإقامات والإضافات بعرض سعر منفصل.'],meydan:['Licence fee AED 12,500. Visas and add-ons are quoted separately.','رسوم الرخصة 12,500 درهم. الإقامات والإضافات بعرض سعر منفصل.']};
+  var TITLES=[['Your company','شركتك'],['Your business','نشاطك'],['Your details','بياناتك'],['Your estimate','التكلفة التقريبية']];
+  var step=1, sent=false;
+  function labels(){
+    [].forEach.call($('sc-zone').options,function(o){o.textContent=Z[o.value][ar()?1:0]});
+    [].forEach.call($('sc-type').options,function(o){o.textContent=N[o.value][ar()?1:0]});
+    [].forEach.call($('wz-when').options,function(o){o.textContent=ar()?WHEN[o.value]:o.value});
+    [].forEach.call($('sc-visas').options,function(o){ if(o.value==='0') o.textContent=T('0 (licence only)','0 (رخصة فقط)'); });
+    $('wz-title').textContent=T.apply(null,TITLES[step-1]); $('wz-next').textContent=step===3?T('See my estimate','اعرض التكلفة'):T('Next','التالي'); $('wz-prev').textContent=T('Previous','السابق');
+    sync(); }
+  function fillVisas(){ var z=$('sc-zone').value, t=$('sc-type').value, sel=$('sc-visas'), cur=sel.value===''?1:+sel.value; sel.innerHTML='';
+    var arr=z==='afz'?P[t]:[0,1,2,3,4,5,6,7,8,9,10];
+    arr.forEach(function(v,i){ if(z==='afz'&&v==null) return; var o=document.createElement('option'); o.value=i; o.textContent=i===0?T('0 (licence only)','0 (رخصة فقط)'):i; sel.appendChild(o); });
+    var ok=[].some.call(sel.options,function(o){return +o.value===cur}); sel.value=ok?cur:sel.options[0].value; }
+  function sync(){ var z=$('sc-zone').value, t=$('sc-type').value, afz=z==='afz';
+    $('sc-afz').hidden=!afz; $('sc-zone-note').hidden=afz; if(!afz) $('sc-zone-note').textContent=ZN[z][ar()?1:0];
+    $('sc-what').textContent=W[t][ar()?1:0];
+    var gt=afz&&(t==='virtual'||t==='physical'); $('sc-gt-l').hidden=!gt; if(!gt) $('sc-gt').checked=false;
+    var ex=afz&&t!=='freelancer'; $('sc-extra-l').hidden=!ex; if(!ex) $('sc-extra').value='0';
+    $('sc-dxb-l').hidden=!afz; if(!afz) $('sc-dxb').checked=false; }
+  function estimate(){ var z=$('sc-zone').value, t=$('sc-type').value, v=+$('sc-visas').value, L=[], tot=0, from=false;
+    if(z==='afz'){ var base=P[t][v]||0, g=$('sc-gt').checked?GT:0, e=(+$('sc-extra').value)*EXTRA, d=$('sc-dxb').checked?DXB*v:0;
+      L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); if(d) L.push([T('Dubai medical test','الكشف الطبي في دبي'),d]); tot=base+g+e+d;
+    } else { var lic=z==='shams'?SHAMS:MEYDAN; from=z==='shams'; L.push([T('Licence','الرخصة')+' · '+Z[z][ar()?1:0],lic]); if(v) L.push([v+' '+T('visa(s): quoted separately','إقامة: بعرض سعر منفصل'),null]); tot=lic; }
+    return {z:z,t:t,v:v,lines:L,tot:tot,from:from}; }
+  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+($('sc-dxb').checked?', Dubai medical':'')+' — estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z!=='afz'&&e.v?' + visas':''); }
+  function show(n){ step=n; [].forEach.call(document.querySelectorAll('.wz-step'),function(x){x.hidden=+x.dataset.step!==n}); $('wz-n').textContent=n; $('wz-bar').style.width=(n*25)+'%';
+    $('wz-prev').hidden=n===1||n===4; $('wz-nav').hidden=n===4; $('wz-err').textContent=''; labels();
+    if(n===4) render(); }
+  function render(){ var e=estimate(); $('sc-total').textContent=f(e.tot); $('sc-from').textContent=e.from?T('from','من'):'';
+    $('sc-lines').innerHTML=e.lines.map(function(l){return '<div><dt>'+l[0]+'</dt><dd>'+(l[1]==null?'—':f(l[1]))+'</dd></div>'}).join('');
+    $('sc-inc').textContent=e.z==='afz'?T('Visa packages include establishment card, eChannel, security approval, residency visa, medical test, Emirates ID and status change. Health insurance for visa holders is mandatory and not included.','باقات الإقامة بتشمل بطاقة المنشأة، والإي تشانل، والموافقة الأمنية، والإقامة، والكشف الطبي، والهوية، وتعديل الوضع. التأمين الصحي إلزامي لأصحاب الإقامات ومش داخل في السعر.'):ZN[e.z][ar()?1:0];
+    $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent('Hello El Harmawy, my name is '+$('wz-name').value.trim()+'. I used the setup calculator: '+summary(e)+'. Activity: '+$('wz-act').value.trim()+'. Please send me the exact quote.'); }
+  function err(m){ $('wz-err').textContent=m; }
+  function send(){ var e=estimate(), q=new URLSearchParams();
+    var src=''; try{ var u=new URLSearchParams(location.search); src=u.get('utm_source')?[u.get('utm_source'),u.get('utm_medium'),u.get('utm_campaign')].filter(Boolean).join(' / '):(u.get('source')||(document.referrer?new URL(document.referrer).hostname:'direct')); }catch(x){}
+    [['form-name','leads'],['name',$('wz-name').value.trim()],['phone',$('wz-phone').value.trim()],['email',$('wz-email').value.trim()],['service','Business setup / company formation'],
+     ['setup_location',Z[e.z][0]],['setup_type',e.z==='afz'?N[e.t][0]:'Licence'],['setup_visas',String(e.v)],['setup_activity',$('wz-act').value.trim()],['offer','Calculator: '+summary(e)],
+     ['message','Start: '+$('wz-when').value+' · Shareholders: '+$('wz-sh').value+' · Nationalities: '+$('wz-nat').value.trim()],['source',('calculator · '+src).slice(0,120)],['language',site.getAttribute('lang')||'en'],['consent','yes'],['call_time','Any time']].forEach(function(kv){q.append(kv[0],kv[1])});
+    var live=/(netlify\.app|elharmawy\.com)$/.test(location.hostname); if(!live) return Promise.resolve();
+    return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:q.toString()}).then(function(r){ if(!r.ok) throw 0; }); }
+  $('wz-form').addEventListener('submit',function(ev){ ev.preventDefault();
+    if(step===2&&!$('wz-act').value.trim()){ err(T('Please write your business activity.','من فضلك اكتب النشاط التجاري.')); $('wz-act').focus(); return; }
+    if(step===3){ if(!$('wz-name').value.trim()){ err(T('Please enter your name.','من فضلك اكتب اسمك.')); $('wz-name').focus(); return; }
+      if($('wz-phone').value.replace(/\D/g,'').length<9){ err(T('Please enter a valid mobile number, e.g. +971 50 123 4567.','من فضلك اكتب رقم موبايل صحيح، مثل ‎+971 50 123 4567.')); $('wz-phone').focus(); return; }
+      if(!$('wz-ok').checked){ err(T('Please tick the consent box so we can contact you.','من فضلك وافق على التواصل عشان نقدر نرد عليك.')); return; }
+      var b=$('wz-next'); b.disabled=true;
+      send().then(function(){ sent=true; try{ var e=estimate(); hbcTrack('generate_lead',{service:'Business setup / company formation',value:e.tot,currency:'AED'}); hbcTrack('setup_calculator_lead',{zone:e.z,visas:e.v}); }catch(x){} show(4); })
+        .catch(function(){ err(T('Sorry, your details were not sent. Please try again or message us on WhatsApp +971 56 346 9000.','عذرًا، بياناتك ما اتبعتتش. حاول تاني أو راسلنا على واتساب ‎+971 56 346 9000.')); })
+        .then(function(){ b.disabled=false; }); return; }
+    if(step===1) try{ hbcTrack('setup_calculator_start',{zone:$('sc-zone').value}); }catch(x){}
+    show(step+1); $('wiz').scrollIntoView({block:'start'}); });
+  $('wz-prev').addEventListener('click',function(){ show(step-1); });
+  $('wz-again').addEventListener('click',function(){ show(1); });
+  ['sc-zone','sc-type'].forEach(function(id){ $(id).addEventListener('change',function(){ fillVisas(); sync(); }); });
+  $('langBtn').addEventListener('click',function(){ setTimeout(function(){ labels(); if(step===4) render(); },0); });
+  fillVisas(); $('sc-visas').value='1'; show(1);
 })();
 </script>
 </body>
