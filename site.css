@@ -567,3 +567,8 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .ssteps p { margin: 0; font-size: 14.5px; color: var(--muted); }
 @media (max-width: 1000px) { .ssteps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .ssteps { grid-template-columns: 1fr; } }
+.g-table.cmp td:last-child, .g-table.cmp th:last-child { white-space: normal; text-align: start; font-weight: 400; }
+.g-table.cmp td:first-child { font-weight: 600; color: var(--navy); }
+.g-table.cmp table { table-layout: fixed; }
+.g-table.cmp td, .g-table.cmp th { padding: 10px; font-size: 14px; }
+.g-table.cmp th:first-child, .g-table.cmp td:first-child { width: 28%; }
