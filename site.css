@@ -526,3 +526,4 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 560px) { .wiz .row2 { grid-template-columns: 1fr; } #wz-form { padding: 18px; } .wiz-top { padding: 16px 18px; } }
 .wz-nav .btn[hidden], .wiz [hidden] { display: none !important; }
+.wz-result dl .renew dt, .wz-result dl .renew dd { color: var(--gold); }

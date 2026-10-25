@@ -247,7 +247,7 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
             <label class="sc-check" for="wz-ok"><input type="checkbox" id="wz-ok"> <span><span data-l="en">I agree that El Harmawy Business Consultancy may contact me about this estimate, as described in the <a href="privacy.html">Privacy Policy</a>.</span><span data-l="ar">أوافق إن الهرماوي لاستشارات الأعمال تتواصل معايا بخصوص التكلفة دي، حسب <a href="privacy.html">سياسة الخصوصية</a>.</span></span></label>
           </fieldset>
           <div class="wz-step wz-result" data-step="4" hidden aria-live="polite">
-            <span class="k"><span data-l="en">Your estimated setup cost, 1 year</span><span data-l="ar">التكلفة التقريبية لتأسيس شركتك، سنة واحدة</span></span>
+            <span class="k"><span data-l="en">Your estimated cost for the first year</span><span data-l="ar">التكلفة التقريبية للسنة الأولى</span></span>
             <span class="big"><small id="sc-from"></small> <small class="cur">AED</small> <span id="sc-total">0</span></span>
             <dl id="sc-lines"></dl>
             <p class="sc-inc" id="sc-inc"></p>
@@ -939,7 +939,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
   var $=function(i){return document.getElementById(i)}, site=$('site'); if(!$('wiz')) return;
   var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return Math.round(n).toLocaleString('en-US')}, T=function(en,a){return ar()?a:en};
   var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],freelancer:[6010,12131],light:[null,11000]};
-  var GT=2000, EXTRA=1000, DXB=105, SHAMS=5700, MEYDAN=12500;
+  var GT=2000, EXTRA=1000, DXB=105, SHAMS=5700, MEYDAN=12500, AFZ_FIRST_YEAR_DISCOUNT=0.30; /* Ajman only, on the package price, first year */
   var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي']};
   var N={virtual:['Virtual office (co-working)','مكتب افتراضي (مساحة عمل مشتركة)'],physical:['Physical office, Al Jurf','مكتب فعلي في الجرف'],freelancer:['Freelancer permit','تصريح عمل حر (فريلانسر)'],light:['AFZ Light (B2B)','AFZ لايت (للشركات B2B)']};
   var W={virtual:['Up to 10 mixed activities · up to 10 shareholders · virtual office','حتى 10 أنشطة متنوعة · حتى 10 شركاء · مكتب افتراضي'],physical:['Up to 10 mixed activities · up to 10 shareholders · office lease in Al Jurf','حتى 10 أنشطة متنوعة · حتى 10 شركاء · عقد مكتب في الجرف'],freelancer:['1 professional activity · 1 freelancer · permit and lease agreement','نشاط مهني واحد · فريلانسر واحد · تصريح وعقد إيجار'],light:['Up to 3 activities · up to 2 shareholders · virtual office · 1 visa · for B2B companies','حتى 3 أنشطة · حتى شريكين · مكتب افتراضي · إقامة واحدة · للشركات B2B']};
@@ -966,15 +966,15 @@ document.querySelectorAll('.vframe').forEach(function(f){
     $('sc-dxb-l').hidden=!afz; if(!afz) $('sc-dxb').checked=false; }
   function estimate(){ var z=$('sc-zone').value, t=$('sc-type').value, v=+$('sc-visas').value, L=[], tot=0, from=false;
     if(z==='afz'){ var base=P[t][v]||0, g=$('sc-gt').checked?GT:0, e=(+$('sc-extra').value)*EXTRA, d=$('sc-dxb').checked?DXB*v:0;
-      L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); if(d) L.push([T('Dubai medical test','الكشف الطبي في دبي'),d]); tot=base+g+e+d;
+      var disc=Math.round(base*AFZ_FIRST_YEAR_DISCOUNT); L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(disc) L.push([T('First-year discount 30%','خصم السنة الأولى 30%'),-disc]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); if(d) L.push([T('Dubai medical test','الكشف الطبي في دبي'),d]); tot=base-disc+g+e+d; var renew=base+g+e;
     } else { var lic=z==='shams'?SHAMS:MEYDAN; from=z==='shams'; L.push([T('Licence','الرخصة')+' · '+Z[z][ar()?1:0],lic]); if(v) L.push([v+' '+T('visa(s): quoted separately','إقامة: بعرض سعر منفصل'),null]); tot=lic; }
-    return {z:z,t:t,v:v,lines:L,tot:tot,from:from}; }
-  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+($('sc-dxb').checked?', Dubai medical':'')+' — estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z!=='afz'&&e.v?' + visas':''); }
+    return {z:z,t:t,v:v,lines:L,tot:tot,from:from,renew:(z==='afz'?renew:null)}; }
+  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+($('sc-dxb').checked?', Dubai medical':'')+' — first-year estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z==='afz'?' (incl. 30% first-year discount)':'')+(e.z!=='afz'&&e.v?' + visas':''); }
   function show(n){ step=n; [].forEach.call(document.querySelectorAll('.wz-step'),function(x){x.hidden=+x.dataset.step!==n}); $('wz-n').textContent=n; $('wz-bar').style.width=(n*25)+'%';
     $('wz-prev').hidden=n===1||n===4; $('wz-nav').hidden=n===4; $('wz-err').textContent=''; labels();
     if(n===4) render(); }
   function render(){ var e=estimate(); $('sc-total').textContent=f(e.tot); $('sc-from').textContent=e.from?T('from','من'):'';
-    $('sc-lines').innerHTML=e.lines.map(function(l){return '<div><dt>'+l[0]+'</dt><dd>'+(l[1]==null?'—':f(l[1]))+'</dd></div>'}).join('');
+    $('sc-lines').innerHTML=e.lines.map(function(l){return '<div><dt>'+l[0]+'</dt><dd>'+(l[1]==null?'—':(l[1]<0?'− '+f(-l[1]):f(l[1])))+'</dd></div>'}).join('')+(e.renew?'<div class="renew"><dt>'+T('Renewal from year 2 (approx.)','التجديد من السنة التانية (تقريبًا)')+'</dt><dd>'+f(e.renew)+'</dd></div>':'');
     $('sc-inc').textContent=e.z==='afz'?T('Visa packages include establishment card, eChannel, security approval, residency visa, medical test, Emirates ID and status change. Health insurance for visa holders is mandatory and not included.','باقات الإقامة بتشمل بطاقة المنشأة، والإي تشانل، والموافقة الأمنية، والإقامة، والكشف الطبي، والهوية، وتعديل الوضع. التأمين الصحي إلزامي لأصحاب الإقامات ومش داخل في السعر.'):ZN[e.z][ar()?1:0];
     $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent('Hello El Harmawy, my name is '+$('wz-name').value.trim()+'. I used the setup calculator: '+summary(e)+'. Activity: '+$('wz-act').value.trim()+'. Please send me the exact quote.'); }
   function err(m){ $('wz-err').textContent=m; }
