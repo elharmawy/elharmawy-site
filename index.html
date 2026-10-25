@@ -207,9 +207,12 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
     <div class="wrap calc-grid">
       <div>
         <div class="eyebrow"><span data-l="en">Setup cost calculator</span><span data-l="ar">حاسبة تكلفة التأسيس</span></div>
-        <h2><span data-l="en">How much does a company in Ajman Free Zone cost?</span><span data-l="ar">شركتك في منطقة عجمان الحرة… بكام؟</span></h2>
-        <p class="calc-intro"><span data-l="en">Choose the licence type and number of visas to see the 2026 Ajman Free Zone package price for one year. Renewal is at the same price.</span><span data-l="ar">اختار نوع الرخصة وعدد الإقامات وشوف سعر باقة منطقة عجمان الحرة 2026 لمدة سنة. التجديد بنفس السعر.</span></p>
+        <h2><span data-l="en">How much does your free zone company cost?</span><span data-l="ar">شركتك في المنطقة الحرة… بكام؟</span></h2>
+        <p class="calc-intro"><span data-l="en">Choose the free zone, licence type and number of visas to see an estimated price for one year.</span><span data-l="ar">اختار المنطقة الحرة ونوع الرخصة وعدد الإقامات وشوف السعر التقريبي لمدة سنة.</span></p>
         <form class="calc-form" id="sc-form" onsubmit="return false">
+          <label for="sc-zone"><span data-l="en">Free zone</span><span data-l="ar">المنطقة الحرة</span>
+            <select id="sc-zone"><option value="afz">Ajman Free Zone</option><option value="shams">Sharjah SHAMS</option></select></label>
+          <div id="sc-afz">
           <label for="sc-type"><span data-l="en">Licence type</span><span data-l="ar">نوع الرخصة</span>
             <select id="sc-type">
               <option value="virtual">Virtual office (co-working) — مكتب افتراضي</option>
@@ -222,6 +225,7 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
             <label for="sc-extra"><span data-l="en">Extra activities</span><span data-l="ar">أنشطة إضافية</span><select id="sc-extra"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
           </div>
           <label class="sc-check" for="sc-gt"><input type="checkbox" id="sc-gt"> <span><span data-l="en">General trading activity (+ AED 2,000)</span><span data-l="ar">نشاط تجارة عامة (+ 2,000 درهم)</span></span></label>
+          </div>
           <label class="sc-check" for="sc-dxb"><input type="checkbox" id="sc-dxb"> <span><span data-l="en">Dubai medical test (+ AED 105 per visa, optional)</span><span data-l="ar">الكشف الطبي في دبي (+ 105 درهم لكل إقامة، اختياري)</span></span></label>
           <p class="sc-what" id="sc-what"></p>
         </form>
@@ -238,7 +242,7 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
         <p class="sc-inc"><span data-l="en">Visa packages include establishment card, eChannel, security approval, residency visa, medical test, Emirates ID and status change. Health insurance for visa holders is mandatory and not included.</span><span data-l="ar">باقات الإقامة بتشمل بطاقة المنشأة، والإي تشانل، والموافقة الأمنية، والإقامة، والكشف الطبي، والهوية، وتعديل الوضع. التأمين الصحي إلزامي لأصحاب الإقامات ومش داخل في السعر.</span></p>
         <a class="btn btn-gold" id="sc-wa" href="https://wa.me/971563469000" target="_blank" rel="noopener"><span data-l="en">Send me this quote on WhatsApp</span><span data-l="ar">ابعتلي العرض ده على واتساب</span></a>
         <a class="sc-form-link promo-btn" href="#register" data-service="Business setup / company formation"><span data-l="en">Or request a written quote</span><span data-l="ar">أو اطلب عرض سعر مكتوب</span></a>
-        <p class="sc-fine"><span data-l="en">Prices are based on Ajman Free Zone 2026 packages and may change. Your final price is confirmed in a written quote.</span><span data-l="ar">الأسعار حسب باقات منطقة عجمان الحرة 2026 وممكن تتغير. السعر النهائي بيتأكد في عرض سعر مكتوب.</span></p>
+        <p class="sc-fine"><span data-l="en">Prices are based on the free zones' 2026 packages and may change. Your final price is confirmed in a written quote.</span><span data-l="ar">الأسعار حسب باقات المناطق الحرة 2026 وممكن تتغير. السعر النهائي بيتأكد في عرض سعر مكتوب.</span></p>
       </div>
     </div>
   </section>
@@ -928,7 +932,13 @@ document.querySelectorAll('.vframe').forEach(function(f){
   function fillVisas(){ var t=$('sc-type').value, cur=+$('sc-visas').value||1, sel=$('sc-visas'); sel.innerHTML='';
     P[t].forEach(function(v,i){ if(v==null) return; var o=document.createElement('option'); o.value=i; o.textContent=i===0?(ar()?'0 (رخصة فقط)':'0 (licence only)'):i; sel.appendChild(o); });
     var ok=[].some.call(sel.options,function(o){return +o.value===cur}); sel.value=ok?cur:sel.options[0].value; }
-  function calc(){ var t=$('sc-type').value, v=+$('sc-visas').value, base=P[t][v]||0;
+  var SHAMS_LICENCE=5700;
+  function calc(){ var zone=$('sc-zone').value, isS=zone==='shams'; $('sc-afz').hidden=isS; $('sc-dxb').closest('label').hidden=isS;
+    if(isS){ $('sc-base').textContent=f(SHAMS_LICENCE); $('sc-gtv').textContent='0'; $('sc-exv').textContent='0'; $('sc-dxv').textContent='0'; $('sc-total').textContent=f(SHAMS_LICENCE);
+      $('sc-what').textContent=ar()?'شمس الشارقة: الرخصة فقط تبدأ من 5,700 درهم. الإقامات والإضافات بعرض سعر منفصل.':'Sharjah SHAMS: licence only, from AED 5,700. Visas and add-ons are quoted separately.';
+      $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent('Hello El Harmawy, I used the setup calculator: Sharjah SHAMS, licence only, from AED 5,700. Please send me the exact quote.');
+      var fo0=$('f-offer'); if(fo0) fo0.dataset.calc='SHAMS licence only / from AED 5,700'; return; }
+    var t=$('sc-type').value, v=+$('sc-visas').value, base=P[t][v]||0;
     var allowGT=(t==='virtual'||t==='physical'); $('sc-gt').disabled=!allowGT; if(!allowGT) $('sc-gt').checked=false;
     var allowEx=(t!=='freelancer'); $('sc-extra').disabled=!allowEx; if(!allowEx) $('sc-extra').value='0';
     var gt=$('sc-gt').checked?GT:0, ex=(+$('sc-extra').value)*EXTRA, dx=$('sc-dxb').checked?DXB*v:0, tot=base+gt+ex+dx+SERVICE_FEE;
@@ -938,7 +948,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
     var msg='Hello El Harmawy, I used the setup calculator: Ajman Free Zone, '+name+', '+v+' visa(s)'+(gt?', general trading':'')+(ex?', '+(ex/EXTRA)+' extra activit'+(ex/EXTRA>1?'ies':'y'):'')+(dx?', Dubai medical':'')+'. Estimated AED '+f(tot)+'. Please send me the exact quote.';
     $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent(msg);
     var fo=$('f-offer'); if(fo) fo.dataset.calc='AFZ '+name+' / '+v+' visa / AED '+f(tot); }
-  ['sc-type','sc-visas','sc-extra','sc-gt','sc-dxb'].forEach(function(id){ $(id).addEventListener('change',function(){ if(id==='sc-type') fillVisas(); calc(); try{ gtag('event','setup_calculator_use',{licence:$('sc-type').value,visas:$('sc-visas').value}); }catch(e){} }); });
+  ['sc-zone','sc-type','sc-visas','sc-extra','sc-gt','sc-dxb'].forEach(function(id){ $(id).addEventListener('change',function(){ if(id==='sc-type') fillVisas(); calc(); try{ gtag('event','setup_calculator_use',{zone:$('sc-zone').value,licence:$('sc-type').value,visas:$('sc-visas').value}); }catch(e){} }); });
   $('langBtn').addEventListener('click',function(){ setTimeout(calc,0); });
   document.querySelector('.sc-form-link').addEventListener('click',function(){ var fo=$('f-offer'); if(fo&&fo.dataset.calc) fo.value=fo.dataset.calc; });
   $('sc-wa').addEventListener('click',function(){ try{ gtag('event','setup_quote_whatsapp',{value:+$('sc-total').textContent.replace(/,/g,''),currency:'AED'}); }catch(e){} });
