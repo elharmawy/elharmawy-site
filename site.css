@@ -474,3 +474,4 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .nav { gap: 18px; font-size: 14.5px; white-space: nowrap; align-items: center; }
 @media (max-width: 1080px) { .nav a[href="#solutions"], .nav a[href="#videos"] { display: none; } }
 .pk-ex { margin: 0; font-size: 12.5px; color: var(--muted); border-inline-start: 2px solid var(--gold); padding-inline-start: 10px; }
+.vcond { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 500; color: var(--muted); }
