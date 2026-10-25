@@ -985,7 +985,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
      ['message','Start: '+$('wz-when').value+' · Shareholders: '+$('wz-sh').value+' · Nationalities: '+$('wz-nat').value.trim()],['source',('calculator · '+src).slice(0,120)],['language',site.getAttribute('lang')||'en'],['consent','yes'],['call_time','Any time']].forEach(function(kv){q.append(kv[0],kv[1])});
     var live=/(netlify\.app|elharmawy\.com)$/.test(location.hostname); if(!live) return Promise.resolve();
     return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:q.toString()}).then(function(r){ if(!r.ok) throw 0; }); }
-  $('wz-form').addEventListener('submit',function(ev){ ev.preventDefault();
+  $('wz-form').addEventListener('submit',function(ev){ ev.preventDefault(); $('wz-err').textContent='';
     if(step===2&&!$('wz-act').value.trim()){ err(T('Please write your business activity.','من فضلك اكتب النشاط التجاري.')); $('wz-act').focus(); return; }
     if(step===3){ if(!$('wz-name').value.trim()){ err(T('Please enter your name.','من فضلك اكتب اسمك.')); $('wz-name').focus(); return; }
       if($('wz-phone').value.replace(/\D/g,'').length<9){ err(T('Please enter a valid mobile number, e.g. +971 50 123 4567.','من فضلك اكتب رقم موبايل صحيح، مثل ‎+971 50 123 4567.')); $('wz-phone').focus(); return; }
@@ -999,6 +999,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
   $('wz-prev').addEventListener('click',function(){ show(step-1); });
   $('wz-again').addEventListener('click',function(){ show(1); });
   ['sc-zone','sc-type'].forEach(function(id){ $(id).addEventListener('change',function(){ fillVisas(); sync(); }); });
+  ['wz-act','wz-name','wz-phone','wz-ok'].forEach(function(id){ $(id).addEventListener('input',function(){ $('wz-err').textContent=''; }); });
   $('langBtn').addEventListener('click',function(){ setTimeout(function(){ labels(); if(step===4) render(); },0); });
   fillVisas(); $('sc-visas').value='1'; show(1);
 })();
