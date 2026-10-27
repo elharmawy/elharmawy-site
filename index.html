@@ -52,7 +52,7 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=20261027">
 
 </head>
 <body>
@@ -238,7 +238,6 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
               <label for="sc-extra" id="sc-extra-l"><span data-l="en">Extra activities</span><span data-l="ar">أنشطة إضافية</span><select id="sc-extra"><option>0</option><option>1</option><option>2</option><option>3</option></select></label>
             </div>
             <label class="sc-check" for="sc-gt" id="sc-gt-l"><input type="checkbox" id="sc-gt"> <span><span data-l="en">General trading activity (+ AED 2,000)</span><span data-l="ar">نشاط تجارة عامة (+ 2,000 درهم)</span></span></label>
-            <label class="sc-check" for="sc-dxb" id="sc-dxb-l"><input type="checkbox" id="sc-dxb"> <span><span data-l="en">Dubai medical test (+ AED 105 per visa, optional)</span><span data-l="ar">الكشف الطبي في دبي (+ 105 درهم لكل إقامة، اختياري)</span></span></label>
           </fieldset>
           <fieldset class="wz-step" data-step="2" hidden>
             <legend class="sr"><span data-l="en">Step 2: your business</span><span data-l="ar">الخطوة 2: نشاطك</span></legend>
@@ -971,7 +970,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
   var $=function(i){return document.getElementById(i)}, site=$('site'); if(!$('wiz')) return;
   var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return Math.round(n).toLocaleString('en-US')}, T=function(en,a){return ar()?a:en};
   var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],freelancer:[6010,12131],light:[null,11000]};
-  var GT=2000, EXTRA=1000, DXB=105, SHAMS=5700, MEYDAN=12500, AFZ_FIRST_YEAR_DISCOUNT=0.30; /* Ajman only, on the package price, first year */
+  var GT=2000, EXTRA=1000, SHAMS=5700, MEYDAN=12500, AFZ_FIRST_YEAR_DISCOUNT=0.30; /* Ajman only, on the package price, first year */
   var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي']};
   var N={virtual:['Virtual office (co-working)','مكتب افتراضي (مساحة عمل مشتركة)'],physical:['Physical office, Al Jurf','مكتب فعلي في الجرف'],freelancer:['Freelancer permit','تصريح عمل حر (فريلانسر)'],light:['AFZ Light (B2B)','AFZ لايت (للشركات B2B)']};
   var W={virtual:['Up to 10 mixed activities · up to 10 shareholders · virtual office','حتى 10 أنشطة متنوعة · حتى 10 شركاء · مكتب افتراضي'],physical:['Up to 10 mixed activities · up to 10 shareholders · office lease in Al Jurf','حتى 10 أنشطة متنوعة · حتى 10 شركاء · عقد مكتب في الجرف'],freelancer:['1 professional activity · 1 freelancer · permit and lease agreement','نشاط مهني واحد · فريلانسر واحد · تصريح وعقد إيجار'],light:['Up to 3 activities · up to 2 shareholders · virtual office · 1 visa · for B2B companies','حتى 3 أنشطة · حتى شريكين · مكتب افتراضي · إقامة واحدة · للشركات B2B']};
@@ -995,13 +994,13 @@ document.querySelectorAll('.vframe').forEach(function(f){
     $('sc-what').textContent=W[t][ar()?1:0];
     var gt=afz&&(t==='virtual'||t==='physical'); $('sc-gt-l').hidden=!gt; if(!gt) $('sc-gt').checked=false;
     var ex=afz&&t!=='freelancer'; $('sc-extra-l').hidden=!ex; if(!ex) $('sc-extra').value='0';
-    $('sc-dxb-l').hidden=!afz; if(!afz) $('sc-dxb').checked=false; }
+    }
   function estimate(){ var z=$('sc-zone').value, t=$('sc-type').value, v=+$('sc-visas').value, L=[], tot=0, from=false;
-    if(z==='afz'){ var base=P[t][v]||0, g=$('sc-gt').checked?GT:0, e=(+$('sc-extra').value)*EXTRA, d=$('sc-dxb').checked?DXB*v:0;
-      var disc=Math.round(base*AFZ_FIRST_YEAR_DISCOUNT); L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(disc) L.push([T('First-year discount 30%','خصم السنة الأولى 30%'),-disc]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); if(d) L.push([T('Dubai medical test','الكشف الطبي في دبي'),d]); tot=base-disc+g+e+d; var renew=base+g+e;
+    if(z==='afz'){ var base=P[t][v]||0, g=$('sc-gt').checked?GT:0, e=(+$('sc-extra').value)*EXTRA;
+      var disc=Math.round(base*AFZ_FIRST_YEAR_DISCOUNT); L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(disc) L.push([T('First-year discount 30%','خصم السنة الأولى 30%'),-disc]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); tot=base-disc+g+e; var renew=base+g+e;
     } else { var lic=z==='shams'?SHAMS:MEYDAN; from=z==='shams'; L.push([T('Licence','الرخصة')+' · '+Z[z][ar()?1:0],lic]); if(v) L.push([v+' '+T('visa(s): quoted separately','إقامة: بعرض سعر منفصل'),null]); tot=lic; }
     return {z:z,t:t,v:v,lines:L,tot:tot,from:from,renew:(z==='afz'?renew:null)}; }
-  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+($('sc-dxb').checked?', Dubai medical':'')+' — first-year estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z==='afz'?' (incl. 30% first-year discount)':'')+(e.z!=='afz'&&e.v?' + visas':''); }
+  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+' — first-year estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z==='afz'?' (incl. 30% first-year discount)':'')+(e.z!=='afz'&&e.v?' + visas':''); }
   function show(n){ step=n; [].forEach.call(document.querySelectorAll('.wz-step'),function(x){x.hidden=+x.dataset.step!==n}); $('wz-n').textContent=n; $('wz-bar').style.width=(n*25)+'%';
     $('wz-prev').hidden=n===1||n===4; $('wz-nav').hidden=n===4; $('wz-err').textContent=''; labels();
     if(n===4) render(); }

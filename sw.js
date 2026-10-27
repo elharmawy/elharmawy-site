@@ -1,5 +1,5 @@
 // HBC app service worker: makes the site installable and opens offline with the last saved copy.
-const CACHE = "hbc-v1";
+const CACHE = "hbc-v2";
 const CORE = ["/", "/site.css", "/logo.png", "/favicon.png", "/founder.jpg", "/icons/icon-192.png", "/manifest.webmanifest"];
 
 self.addEventListener("install", e => {
@@ -17,8 +17,8 @@ self.addEventListener("fetch", e => {
       .catch(() => caches.match(req).then(m => m || caches.match("/"))));
     return;
   }
-  e.respondWith(caches.match(req).then(m => m || fetch(req).then(r => {          // static files: saved copy first
+  e.respondWith(fetch(req).then(r => {                                           // static files: fresh first, saved copy when offline
     if (r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(req, c)); }
     return r;
-  })));
+  }).catch(() => caches.match(req)));
 });
