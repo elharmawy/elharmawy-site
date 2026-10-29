@@ -103,10 +103,10 @@ body{padding-bottom:84px}
   document.addEventListener('click',function(e){ var a=e.target.closest('a[data-ev]'); if(!a) return; try{ gtag('event', a.getAttribute('data-ev')==='service'?'whatsapp_click':'links_'+a.getAttribute('data-ev'), {place:'qr_links', service:a.getAttribute('data-svc')||''}); }catch(x){} });
 })();
 </script>
-<audio id="bgm" src="/piano.mp3" loop preload="none"></audio>
+<audio id="bgm" src="/piano-calm.mp3" loop preload="none"></audio>
 <button class="mus" id="mus" type="button" aria-pressed="false" aria-label="Music on/off"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span class="bars"><i></i><i></i><i></i></span><span class="lb">🎹</span></button>
 <script>
-(function(){var a=document.getElementById('bgm'),b=document.getElementById('mus'),on=false,off=false,T=0.35;
+(function(){var a=document.getElementById('bgm'),b=document.getElementById('mus'),on=false,off=false,T=0.2;
 try{off=localStorage.getItem('hbc_music')==='off'}catch(e){}
 function fade(to){var v=a.volume,s=(to-v)/20,i=0;var t=setInterval(function(){i++;a.volume=Math.max(0,Math.min(1,v+s*i));if(i>=20){clearInterval(t);if(to===0)a.pause()}},40)}
 function play(){if(on)return;a.volume=0;var p=a.play();if(p&&p.then)p.then(function(){on=true;b.classList.add('on');b.setAttribute('aria-pressed','true');fade(T)}).catch(function(){})}
