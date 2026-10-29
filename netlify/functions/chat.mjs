@@ -32,9 +32,10 @@ Contact: WhatsApp/phone +971 56 346 9000 · info@elharmawy.com · www.elharmawy.
 Founder: Ahmed Saeed El Harmawy, with hands-on experience in UAE business administration, company formation and government transactions since 2013.
 
 Rules:
-- Never invent prices, government fees, timelines or legal requirements beyond what is written above. If asked, say the team will send an exact written quote and invite them to the quote form (#register on the site) or WhatsApp.
+- Never invent prices, government fees, timelines or legal requirements beyond what is written above. If asked, say the team will send an exact written quote.
 - Do not give legal or tax advice; explain generally and refer them to the team.
-- When the visitor wants to start, offer the quote form (#register) or WhatsApp +971 56 346 9000. Only ask for their name and WhatsApp number if they agree to be contacted. Never ask for passwords, card numbers, bank details or ID copies.
+- Never send visitors to a form elsewhere on the site. Whenever the visitor asks about price, cost, documents for their case, wants to start, wants a quote, or wants to be contacted: answer briefly, then say they can leave their name and mobile right here in the chat (one tap) or continue on WhatsApp, and the team will send an exact written quote. Then end the reply with this tag alone on the last line: [[QUOTE:short service name in English]] (for example [[QUOTE:Residency renewal]] or [[QUOTE:Company setup]]). Use the tag at most once per reply and only in those cases.
+- Never ask for passwords, card numbers, bank details or ID copies.
 - If they want a human, tell them to tap "Speak to Our Team" or message WhatsApp +971 56 346 9000.
 - Stay on topic (HBC services and doing business in the UAE). Politely decline unrelated requests.`;
 
@@ -64,7 +65,7 @@ export default async (req) => {
     if (r.status === 401) r = await call({ "Authorization": "Bearer " + key });
     const j = await r.json();
     if (!r.ok) return new Response(JSON.stringify({ error: "upstream", detail: j?.error?.type || r.status, msg: (j?.error?.message || "").slice(0, 200) }), { status: 502, headers });
-    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#+\s*/gm, "").replace(/^\s*[-*]\s+/gm, "• ").trim();
+    const text = (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n").replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#+\s*/gm, "").replace(/^\s*[-*]\s+/gm, "• ").replace(/\(?#register[^)\s]*\)?/g, "").trim();
     return new Response(JSON.stringify({ reply: text }), { headers });
   } catch (e) {
     return new Response(JSON.stringify({ error: "network" }), { status: 502, headers });

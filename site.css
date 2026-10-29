@@ -579,3 +579,9 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .pk-all li{position:relative;padding-inline-start:22px;font-size:.95rem;line-height:1.5}
 .pk-all li::before{content:"✓";position:absolute;inset-inline-start:0;top:0;color:#D3A45F;font-weight:700}
 .pk-all-note{margin:12px 0 0;font-size:.88rem;color:#56657A}
+
+.ai-lead{align-self:stretch;background:#FBF3E4;border:1px solid rgba(211,164,95,.6);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--navy)}
+.ai-lead p{margin:0 0 8px}.ai-lead p.ok{margin:0;font-weight:600;color:#1E7A46}
+.ai-lead form{display:grid;gap:6px}.ai-lead input{font:inherit;font-size:16px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;width:100%;box-sizing:border-box}
+.ai-lead-btns{display:flex;gap:6px;flex-wrap:wrap}.ai-lead-btns .btn{flex:1;min-width:120px;padding:9px 12px;font-size:14px}
+.ai-lead .ai-wa{flex:1;min-width:120px;text-align:center;background:#1E8E5A;color:#fff;border-radius:999px;padding:9px 12px;font-weight:600;text-decoration:none;font-size:14px}
