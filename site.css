@@ -624,3 +624,7 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .svc-dark .svc{background:rgba(255,255,255,.97)}
 .svc-dark .svc h3,.svc-dark .pcard h3{color:var(--navy)}
 .svc-dark .more-head h3{color:#fff}
+
+.svc-dark .svc-ask{background:#FBF6EE}
+.svc-ask-btn{display:inline-block;margin-top:12px;padding:9px 18px;border-radius:999px;background:var(--navy);color:#fff;font-weight:600;font-size:.92rem;text-decoration:none}
+.svc-ask-btn:hover{background:#D3A45F;color:#011F43}
