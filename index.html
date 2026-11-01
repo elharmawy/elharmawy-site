@@ -288,15 +288,15 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
     <div class="wrap">
       <div class="head">
         <div class="eyebrow"><span data-l="en">Setup cost calculator</span><span data-l="ar">حاسبة تكلفة التأسيس</span></div>
-        <h2><span data-l="en">How much does your free zone company cost?</span><span data-l="ar">شركتك في المنطقة الحرة… بكام؟</span></h2>
-        <p class="calc-intro"><span data-l="en">Four quick steps and you get an estimated setup cost for Ajman Free Zone, Sharjah SHAMS or Meydan Free Zone Dubai.</span><span data-l="ar">أربع خطوات سريعة وتعرف التكلفة التقريبية لتأسيس شركتك في منطقة عجمان الحرة أو شمس الشارقة أو منطقة ميدان الحرة في دبي.</span></p>
+        <h2><span data-l="en">How much does your company cost?</span><span data-l="ar">شركتك… بكام؟</span></h2>
+        <p class="calc-intro"><span data-l="en">Four quick steps and you get an estimated setup cost for Ajman Free Zone, Sharjah SHAMS, Meydan Free Zone or Dubai mainland.</span><span data-l="ar">أربع خطوات سريعة وتعرف التكلفة التقريبية لتأسيس شركتك في منطقة عجمان الحرة أو شمس الشارقة أو منطقة ميدان الحرة أو البر الرئيسي في دبي.</span></p>
       </div>
       <div class="wiz" id="wiz">
         <div class="wiz-top"><b id="wz-title"><span data-l="en">Your company</span><span data-l="ar">شركتك</span></b><div class="wiz-bar" aria-hidden="true"><i id="wz-bar"></i></div><span class="wiz-n"><span id="wz-n">1</span> / 4</span></div>
         <form id="wz-form" novalidate>
           <fieldset class="wz-step" data-step="1">
             <legend class="sr"><span data-l="en">Step 1: your company</span><span data-l="ar">الخطوة 1: شركتك</span></legend>
-            <label for="sc-zone"><span data-l="en">Free zone</span><span data-l="ar">المنطقة الحرة</span><select id="sc-zone"><option value="afz"></option><option value="shams"></option><option value="meydan"></option></select></label>
+            <label for="sc-zone"><span data-l="en">Free zone or mainland</span><span data-l="ar">المنطقة الحرة أو البر الرئيسي</span><select id="sc-zone"><option value="afz"></option><option value="shams"></option><option value="meydan"></option><option value="dxbml"></option></select></label>
             <div id="sc-afz">
               <label for="sc-type"><span data-l="en">Licence type</span><span data-l="ar">نوع الرخصة</span><select id="sc-type"><option value="virtual"></option><option value="physical"></option><option value="freelancer"></option><option value="light"></option></select></label>
               <p class="sc-what" id="sc-what"></p>
@@ -1100,12 +1100,13 @@ document.querySelectorAll('.vframe').forEach(function(f){
   var $=function(i){return document.getElementById(i)}, site=$('site'); if(!$('wiz')) return;
   var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return Math.round(n).toLocaleString('en-US')}, T=function(en,a){return ar()?a:en};
   var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],freelancer:[6010,12131],light:[null,11000]};
+  var DXB={name:620,ia:120,typing:464,moa:[1200,1500],lic:[11500,13500],est:750,inv:4100,emp:[7000,8000],fee:1800};
   var GT=2000, EXTRA=1000, SHAMS=5700, MEYDAN=12500, AFZ_FIRST_YEAR_DISCOUNT=0.30; /* Ajman only, on the package price, first year */
-  var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي']};
+  var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي'],dxbml:['Dubai mainland (DET)','دبي – بر رئيسي (اقتصادية دبي)']};
   var N={virtual:['Virtual office (co-working)','مكتب افتراضي (مساحة عمل مشتركة)'],physical:['Physical office, Al Jurf','مكتب فعلي في الجرف'],freelancer:['Freelancer permit','تصريح عمل حر (فريلانسر)'],light:['AFZ Light (B2B)','AFZ لايت (للشركات B2B)']};
   var W={virtual:['Up to 10 mixed activities · up to 10 shareholders · virtual office','حتى 10 أنشطة متنوعة · حتى 10 شركاء · مكتب افتراضي'],physical:['Up to 10 mixed activities · up to 10 shareholders · office lease in Al Jurf','حتى 10 أنشطة متنوعة · حتى 10 شركاء · عقد مكتب في الجرف'],freelancer:['1 professional activity · 1 freelancer · permit and lease agreement','نشاط مهني واحد · فريلانسر واحد · تصريح وعقد إيجار'],light:['Up to 3 activities · up to 2 shareholders · virtual office · 1 visa · for B2B companies','حتى 3 أنشطة · حتى شريكين · مكتب افتراضي · إقامة واحدة · للشركات B2B']};
   var WHEN={'Immediately':'فورًا','Within 1 month':'خلال شهر','1–3 months':'من شهر لـ 3 شهور','Just exploring':'بستكشف بس'};
-  var ZN={shams:['Licence only, from AED 5,700. Visas and add-ons are quoted separately.','الرخصة فقط تبدأ من 5,700 درهم. الإقامات والإضافات بعرض سعر منفصل.'],meydan:['Licence fee AED 12,500 per year. Fully online setup, done in days, with over 2,500 business activities to choose from. You can pay in full or split it with Tabby or Tamara. Visas and add-ons are quoted separately.','رسوم الرخصة 12,500 درهم في السنة. التأسيس أونلاين بالكامل وبيخلص في أيام، وفيه أكتر من 2,500 نشاط تختار منهم. تقدر تدفع مرة واحدة أو تقسّط مع تابي أو تمارا. الإقامات والإضافات بعرض سعر منفصل.']};
+  var ZN={dxbml:['Dubai mainland licence through the Department of Economy and Tourism, with a flexi-desk office (Ejari). Government fees vary by activity; this is an estimate and your final price is confirmed in a written quote.','رخصة بر رئيسي من دائرة الاقتصاد والسياحة في دبي، بمكتب فليكسي ديسك (إيجاري). الرسوم الحكومية بتختلف حسب النشاط؛ دي تكلفة تقديرية والسعر النهائي بعرض سعر مكتوب.'],shams:['Licence only, from AED 5,700. Visas and add-ons are quoted separately.','الرخصة فقط تبدأ من 5,700 درهم. الإقامات والإضافات بعرض سعر منفصل.'],meydan:['Licence fee AED 12,500 per year. Fully online setup, done in days, with over 2,500 business activities to choose from. You can pay in full or split it with Tabby or Tamara. Visas and add-ons are quoted separately.','رسوم الرخصة 12,500 درهم في السنة. التأسيس أونلاين بالكامل وبيخلص في أيام، وفيه أكتر من 2,500 نشاط تختار منهم. تقدر تدفع مرة واحدة أو تقسّط مع تابي أو تمارا. الإقامات والإضافات بعرض سعر منفصل.']};
   var TITLES=[['Your company','شركتك'],['Your business','نشاطك'],['Your details','بياناتك'],['Your estimate','التكلفة التقريبية']];
   var step=1, sent=false;
   function labels(){
@@ -1128,14 +1129,21 @@ document.querySelectorAll('.vframe').forEach(function(f){
   function estimate(){ var z=$('sc-zone').value, t=$('sc-type').value, v=+$('sc-visas').value, L=[], tot=0, from=false;
     if(z==='afz'){ var base=P[t][v]||0, g=$('sc-gt').checked?GT:0, e=(+$('sc-extra').value)*EXTRA;
       var disc=Math.round(base*AFZ_FIRST_YEAR_DISCOUNT); L.push([T('Package','الباقة')+' · '+N[t][ar()?1:0]+' · '+v+' '+T('visa(s)','إقامة'),base]); if(disc) L.push([T('First-year discount 30%','خصم السنة الأولى 30%'),-disc]); if(g) L.push([T('General trading','تجارة عامة'),g]); if(e) L.push([T('Extra activities','أنشطة إضافية'),e]); tot=base-disc+g+e; var renew=base+g+e;
+    } else if(z==='dxbml'){ var D=DXB, lo=0, hi=0; function add(l,a,b){ b=b==null?a:b; lo+=a; hi+=b; L.push([l,a===b?a:f(a)+' – '+f(b)]); }
+      add(T('Trade name reservation','حجز الاسم التجاري'),D.name); add(T('Initial approval','الموافقة المبدئية'),D.ia); add(T('Typing (Tasheel)','الطباعة (تسهيل)'),D.typing);
+      add(T('MOA drafting & notarisation','عقد التأسيس وتوثيقه'),D.moa[0],D.moa[1]); add(T('Trade licence issuance (varies by activity)','إصدار الرخصة (حسب النشاط)'),D.lic[0],D.lic[1]);
+      if(v){ add(T('Establishment card','بطاقة المنشأة'),D.est); add(T('Investor / partner visa','إقامة مستثمر / شريك'),D.inv); if(v>1) add((v-1)+' '+T('employee visa(s), incl. labour card','إقامة موظف شاملة بطاقة العمل'),D.emp[0]*(v-1),D.emp[1]*(v-1)); }
+      add(T('El Harmawy service fee','أتعاب الهرماوي'),D.fee);
+      L.push([T('Flexi desk office (Ejari)','مكتب فليكسي ديسك (إيجاري)'),T('in your quote','في عرض السعر')]);
+      tot=lo; from=true; var range=[lo,hi];
     } else { var lic=z==='shams'?SHAMS:MEYDAN; from=z==='shams'; L.push([T('Licence','الرخصة')+' · '+Z[z][ar()?1:0],lic]); if(v) L.push([v+' '+T('visa(s): quoted separately','إقامة: بعرض سعر منفصل'),null]); tot=lic; }
-    return {z:z,t:t,v:v,lines:L,tot:tot,from:from,renew:(z==='afz'?renew:null)}; }
-  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+' — first-year estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z==='afz'?' (incl. 30% first-year discount)':'')+(e.z!=='afz'&&e.v?' + visas':''); }
+    return {z:z,t:t,v:v,lines:L,tot:tot,from:from,range:(typeof range!=='undefined'?range:null),renew:(z==='afz'?renew:null)}; }
+  function summary(e){ return Z[e.z][0]+(e.z==='afz'?', '+N[e.t][0]:', licence')+', '+e.v+' visa(s)'+($('sc-gt').checked?', general trading':'')+(+$('sc-extra').value?', '+$('sc-extra').value+' extra activities':'')+' — first-year estimate '+(e.from?'from ':'')+'AED '+f(e.tot)+(e.z==='afz'?' (incl. 30% first-year discount)':'')+(e.z!=='afz'&&e.z!=='dxbml'&&e.v?' + visas':'')+(e.range?' (range AED '+f(e.range[0])+'–'+f(e.range[1])+', flexi desk extra)':''); }
   function show(n){ step=n; [].forEach.call(document.querySelectorAll('.wz-step'),function(x){x.hidden=+x.dataset.step!==n}); $('wz-n').textContent=n; $('wz-bar').style.width=(n*25)+'%';
     $('wz-prev').hidden=n===1||n===4; $('wz-nav').hidden=n===4; $('wz-err').textContent=''; labels();
     if(n===4) render(); }
   function render(){ var e=estimate(); $('sc-total').textContent=f(e.tot); $('sc-from').textContent=e.from?T('from','من'):'';
-    $('sc-lines').innerHTML=e.lines.map(function(l){return '<div><dt>'+l[0]+'</dt><dd>'+(l[1]==null?'—':(l[1]<0?'− '+f(-l[1]):f(l[1])))+'</dd></div>'}).join('')+(e.renew?'<div class="renew"><dt>'+T('Renewal from year 2 (approx.)','التجديد من السنة التانية (تقريبًا)')+'</dt><dd>'+f(e.renew)+'</dd></div>':'');
+    $('sc-lines').innerHTML=e.lines.map(function(l){return '<div><dt>'+l[0]+'</dt><dd>'+(l[1]==null?'—':(typeof l[1]==='string'?l[1]:(l[1]<0?'− '+f(-l[1]):f(l[1]))))+'</dd></div>'}).join('')+(e.range&&e.range[1]!==e.range[0]?'<div class="renew"><dt>'+T('Estimated range','المدى التقديري')+'</dt><dd>'+f(e.range[0])+' – '+f(e.range[1])+'</dd></div>':'')+(e.renew?'<div class="renew"><dt>'+T('Renewal from year 2 (approx.)','التجديد من السنة التانية (تقريبًا)')+'</dt><dd>'+f(e.renew)+'</dd></div>':'');
     $('sc-inc').textContent=e.z==='afz'?T('Visa packages include establishment card, eChannel, security approval, residency visa, medical test, Emirates ID and status change. Health insurance for visa holders is mandatory and not included.','باقات الإقامة بتشمل بطاقة المنشأة، والإي تشانل، والموافقة الأمنية، والإقامة، والكشف الطبي، والهوية، وتعديل الوضع. التأمين الصحي إلزامي لأصحاب الإقامات ومش داخل في السعر.'):ZN[e.z][ar()?1:0];
     $('sc-wa').href='https://wa.me/971563469000?text='+encodeURIComponent('Hello El Harmawy, my name is '+$('wz-name').value.trim()+'. I used the setup calculator: '+summary(e)+'. Activity: '+$('wz-act').value.trim()+'. Please send me the exact quote.'); }
   function err(m){ $('wz-err').textContent=m; }
