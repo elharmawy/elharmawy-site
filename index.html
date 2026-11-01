@@ -1100,7 +1100,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
   var $=function(i){return document.getElementById(i)}, site=$('site'); if(!$('wiz')) return;
   var ar=function(){return site.getAttribute('dir')==='rtl'}, f=function(n){return Math.round(n).toLocaleString('en-US')}, T=function(en,a){return ar()?a:en};
   var P={virtual:[5565,13141,17181,23242,26272,31323,36898,42898,49898,56898,63898],physical:[null,21760,24760,29760,35510,42740,49981,57221,64462,71702,78942],freelancer:[6010,12131],light:[null,11000]};
-  var DXB={name:620,ia:120,typing:464,moa:[1200,1500],lic:[11500,13500],est:750,inv:4100,emp:[7000,8000],fee:1800};
+  var DXB={name:620,ia:120,typing:464,moa:[1200,1500],lic:[11500,13500],est:750,inv:4100,emp:[7000,8000],fee:2000,visaFee:600};
   var GT=2000, EXTRA=1000, SHAMS=5700, MEYDAN=12500, AFZ_FIRST_YEAR_DISCOUNT=0.30; /* Ajman only, on the package price, first year */
   var Z={afz:['Ajman Free Zone','منطقة عجمان الحرة'],shams:['Sharjah SHAMS Free Zone','منطقة شمس الشارقة الحرة'],meydan:['Meydan Free Zone, Dubai','منطقة ميدان الحرة، دبي'],dxbml:['Dubai mainland (DET)','دبي – بر رئيسي (اقتصادية دبي)']};
   var N={virtual:['Virtual office (co-working)','مكتب افتراضي (مساحة عمل مشتركة)'],physical:['Physical office, Al Jurf','مكتب فعلي في الجرف'],freelancer:['Freelancer permit','تصريح عمل حر (فريلانسر)'],light:['AFZ Light (B2B)','AFZ لايت (للشركات B2B)']};
@@ -1133,7 +1133,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
       add(T('Trade name reservation','حجز الاسم التجاري'),D.name); add(T('Initial approval','الموافقة المبدئية'),D.ia); add(T('Typing (Tasheel)','الطباعة (تسهيل)'),D.typing);
       add(T('MOA drafting & notarisation','عقد التأسيس وتوثيقه'),D.moa[0],D.moa[1]); add(T('Trade licence issuance (varies by activity)','إصدار الرخصة (حسب النشاط)'),D.lic[0],D.lic[1]);
       if(v){ add(T('Establishment card','بطاقة المنشأة'),D.est); add(T('Investor / partner visa','إقامة مستثمر / شريك'),D.inv); if(v>1) add((v-1)+' '+T('employee visa(s), incl. labour card','إقامة موظف شاملة بطاقة العمل'),D.emp[0]*(v-1),D.emp[1]*(v-1)); }
-      add(T('El Harmawy service fee','أتعاب الهرماوي'),D.fee);
+      add(T('El Harmawy service fee: company setup','أتعاب الهرماوي: تأسيس الشركة'),D.fee); if(v) add(T('El Harmawy service fee: visas','أتعاب الهرماوي: الإقامات')+' ('+v+' × '+D.visaFee+')',D.visaFee*v);
       L.push([T('Flexi desk office (Ejari)','مكتب فليكسي ديسك (إيجاري)'),T('in your quote','في عرض السعر')]);
       tot=lo; from=true; var range=[lo,hi];
     } else { var lic=z==='shams'?SHAMS:MEYDAN; from=z==='shams'; L.push([T('Licence','الرخصة')+' · '+Z[z][ar()?1:0],lic]); if(v) L.push([v+' '+T('visa(s): quoted separately','إقامة: بعرض سعر منفصل'),null]); tot=lic; }
