@@ -52,7 +52,7 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css?v=20261031a">
+<link rel="stylesheet" href="site.css?v=20261101a">
 
 </head>
 <body>
@@ -805,11 +805,11 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
 
 
 <button class="ai-fab" id="aiFab" type="button" hidden aria-controls="aiBox" aria-expanded="false">
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg>
-  <span><span data-l="en">Ask HBC</span><span data-l="ar">اسأل الهرماوي</span></span>
+  <span class="ai-duo" aria-hidden="true"><img src="img/ai/zatouna.jpg" alt="" width="34" height="34"><img src="img/ai/lilia.jpg" alt="" width="34" height="34"></span>
+  <span><span data-l="en">Ask Zatouna or Lilia</span><span data-l="ar">اسأل زتونة أو ليليا</span></span>
 </button>
 <section class="ai-box" id="aiBox" hidden aria-label="El Harmawy assistant">
-  <header class="ai-head"><img src="favicon.png" alt="" width="28" height="28"><div><b><span data-l="en">HBC Assistant</span><span data-l="ar">مساعد الهرماوي</span></b><small><span data-l="en">AI answers · team follows up on WhatsApp</span><span data-l="ar">ردود ذكية · والفريق يتابع معاك على واتساب</span></small></div><button type="button" class="ai-x" id="aiX" aria-label="Close">×</button></header>
+  <header class="ai-head"><img id="aiAv" src="favicon.png" alt="" width="34" height="34"><div><b id="aiName"><span data-l="en">HBC Assistant</span><span data-l="ar">مساعد الهرماوي</span></b><small><span data-l="en">AI assistant · our team follows up on WhatsApp</span><span data-l="ar">مساعد ذكي · والفريق يتابع معاك على واتساب</span></small></div><button type="button" class="ai-sw" id="aiSw" hidden><span data-l="en">Switch</span><span data-l="ar">بدّل</span></button><button type="button" class="ai-x" id="aiX" aria-label="Close">×</button></header>
   <div class="ai-log" id="aiLog" aria-live="polite"></div>
   <form class="ai-form" id="aiForm"><input id="aiIn" autocomplete="off" maxlength="1200" placeholder="Type your question… / اكتب سؤالك…"><button class="btn btn-gold" type="submit" aria-label="Send">➤</button></form>
   <p class="ai-foot"><span data-l="en">AI can make mistakes. Prices and requirements are confirmed by our team.</span><span data-l="ar">المساعد ممكن يغلط. الأسعار والمتطلبات بيأكدها فريقنا.</span></p>
@@ -845,13 +845,23 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
     log.appendChild(c); log.scrollTop=log.scrollHeight; }
   function save(){ try{ sessionStorage.setItem('hbcChat', JSON.stringify(hist.slice(-12))); }catch(e){} }
   fetch('/api/chat').then(function(r){ return r.ok?r.json():{}; }).then(function(j){ if(j&&j.ok){ fab.hidden=false; if(location.hash==='#ask') open(true); } }).catch(function(){});
-  function open(o){ box.hidden=!o; fab.setAttribute('aria-expanded',o); if(o){ if(!log.childElementCount){ if(hist.length){ hist.forEach(function(m){ add(m.role==='user'?'me':'bot', m.content); }); } else { add('bot', ar()?'أهلاً بيك في الهرماوي لاستشارات الأعمال! نقدر نساعدك في إيه النهارده؟':'Welcome to El Harmawy Business Consultancy! How can we help you today?'); quick(); } } inp.focus(); } }
+  var P={zatouna:{en:'Zatouna',ar:'زتونة',img:'img/ai/zatouna.jpg',hi_en:"Hi, I'm Zatouna! 😄 Ask me anything about starting or running your company in the UAE.",hi_ar:'أهلاً، أنا زتونة! 😄 اسألني أي حاجة عن تأسيس شركتك أو إدارتها في الإمارات.'},lilia:{en:'Lilia',ar:'ليليا',img:'img/ai/lilia.jpg',hi_en:"Hello, I'm Lilia. 🌸 How can I help you with your company today?",hi_ar:'أهلاً بيك، أنا ليليا 🌸 أقدر أساعدك إزاي في شركتك النهارده؟'}};
+  var who=''; try{ who=sessionStorage.getItem('hbcWho')||''; }catch(e){}
+  var nameEl=document.getElementById('aiName'), avEl=document.getElementById('aiAv'), swEl=document.getElementById('aiSw');
+  function setWho(k){ who=k; try{ sessionStorage.setItem('hbcWho',k); }catch(e){} var p=P[k]; avEl.src=p.img; avEl.alt=''; nameEl.innerHTML='<span data-l="en">'+p.en+'</span><span data-l="ar">'+p.ar+'</span>'; swEl.hidden=false; form.hidden=false; }
+  function pick(){ form.hidden=true; var c=document.createElement('div'); c.className='ai-pick'; var A=ar();
+    c.innerHTML='<p>'+(A?'أهلاً بيك في الهرماوي 👋 تحب تكلّم مين؟':'Welcome to El Harmawy 👋 Who would you like to talk to?')+'</p><div class="ai-pick-row"></div>';
+    ['zatouna','lilia'].forEach(function(k){ var p=P[k], b=document.createElement('button'); b.type='button'; b.innerHTML='<img src="'+p.img+'" alt="" width="72" height="72"><b>'+(A?p.ar:p.en)+'</b>'; b.addEventListener('click',function(){ c.remove(); setWho(k); add('bot', A?p.hi_ar:p.hi_en); quick(); inp.focus(); }); c.querySelector('.ai-pick-row').appendChild(b); });
+    log.appendChild(c); }
+  swEl.addEventListener('click',function(){ log.innerHTML=''; hist=[]; save(); leadDone=false; pick(); });
+  if(who&&P[who]) setWho(who);
+  function open(o){ box.hidden=!o; fab.setAttribute('aria-expanded',o); if(o){ if(!log.childElementCount){ if(hist.length&&who){ hist.forEach(function(m){ add(m.role==='user'?'me':'bot', m.content); }); } else { pick(); } } if(!form.hidden) inp.focus(); } }
   fab.addEventListener('click',function(){ open(box.hidden); });
   document.getElementById('aiX').addEventListener('click',function(){ open(false); });
   form.addEventListener('submit',function(e){ e.preventDefault(); var t=inp.value.trim(); if(!t) return; inp.value='';
     add('me',t); hist.push({role:'user',content:t}); save();
     var w=add('bot', ar()?'…بيكتب':'Typing…'); w.classList.add('wait');
-    fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist})})
+    fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,persona:who})})
       .then(function(r){ return r.json(); })
       .then(function(j){ w.classList.remove('wait'); if(j.reply){ var m=j.reply.match(/\[\[QUOTE:([^\]]*)\]\]/), clean=j.reply.replace(/\s*\[\[QUOTE:[^\]]*\]\]\s*/g,'').trim(); w.textContent=clean; hist.push({role:'assistant',content:clean}); save(); if(m||/WhatsApp|واتساب|عرض سعر|written quote/i.test(clean)) leadCard((m&&m[1].trim())||'General enquiry'); } else throw 0; })
       .catch(function(){ w.classList.remove('wait'); w.textContent= ar()?'حصلت مشكلة. كلمنا على واتساب ‎+971 56 346 9000':'Something went wrong. Please WhatsApp us on +971 56 346 9000.'; hist.pop(); save(); });

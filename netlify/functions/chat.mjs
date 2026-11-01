@@ -63,7 +63,12 @@ export default async (req) => {
   if (!msgs.length || msgs[msgs.length - 1].role !== "user") return new Response(JSON.stringify({ error: "no_message" }), { status: 400, headers });
   while (msgs.length && msgs[0].role !== "user") msgs.shift();
   try {
-    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM, messages: msgs });
+    const PERSONAS = {
+      zatouna: "\n\nPersona: In this chat you are \"Zatouna\" (زتونة), HBC's friendly AI assistant character: warm, upbeat and a little playful, short sentences, an occasional emoji. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged.",
+      lilia: "\n\nPersona: In this chat you are \"Lilia\" (ليليا), HBC's calm and polished AI assistant character: polite, clear and reassuring, professional tone. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged."
+    };
+    const persona = PERSONAS[body.persona] || "";
+    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM + persona, messages: msgs });
     const base = { "anthropic-version": "2023-06-01", "content-type": "application/json" };
     const call = (auth) => fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { ...base, ...auth }, body: payload });
     let r = await call({ "x-api-key": key });
