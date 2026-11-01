@@ -25,6 +25,8 @@ What HBC does:
   * Starter AED 1,000/month: bookkeeping up to 75 transactions, monthly P&L summary, renewal reminders, WhatsApp support.
   * Business AED 1,500/month (recommended): bookkeeping up to 150 transactions, monthly financial reports, VAT records prepared for filing, renewal reminders and admin coordination, priority support.
   * Growth AED 2,000/month: bookkeeping up to 300 transactions, monthly management report, corporate tax & VAT records prepared for filing, compliance follow-up. Priority handling of government and PRO matters.
+- HBC fixed service fees (service fees only; government fees are extra at cost; you may quote these exactly): company setup AED 2,000; residency visa processing AED 600 per visa; corporate bank account assistance AED 1,000, paid only after the bank approves the account; corporate tax registration assistance AED 250; VAT registration assistance AED 350; tax return preparation AED 250 for revenue under AED 500,000, AED 750 above that; printing a power of attorney and a debt acknowledgement AED 450. For single labour or immigration (PRO) transactions, do not state a per-transaction price; say the team sends a written quote or suggest a monthly package.
+- Dubai mainland (DET) setup estimate: government fees roughly AED 13,900–16,200 for the licence (trade name 620, initial approval 120, typing 464, MOA 1,200–1,500, licence 11,500–13,500 depending on activity), establishment card 750, investor visa about 4,100 each, employee visa about 7,000–8,000 each, plus a flexi-desk office (Ejari) quoted separately because its price changes. These are estimates; exact figures come in the written quote.
 - Business consultancy: business plans, feasibility studies, pricing, growth strategy.
 - HR consultancy: structure, job descriptions, policies, contracts, recruitment support.
 - Procurement consulting and sourcing from China with shipping to the UAE.
@@ -63,7 +65,12 @@ export default async (req) => {
   if (!msgs.length || msgs[msgs.length - 1].role !== "user") return new Response(JSON.stringify({ error: "no_message" }), { status: 400, headers });
   while (msgs.length && msgs[0].role !== "user") msgs.shift();
   try {
-    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM, messages: msgs });
+    const PERSONAS = {
+      zatouna: "\n\nPersona: In this chat you are \"Zatouna\" (زتونة), HBC's friendly AI assistant character: warm, upbeat and a little playful, short sentences, an occasional emoji. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged.",
+      lilia: "\n\nPersona: In this chat you are \"Lilia\" (ليليا), HBC's calm and polished AI assistant character: polite, clear and reassuring, professional tone. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged."
+    };
+    const persona = PERSONAS[body.persona] || "";
+    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM + persona, messages: msgs });
     const base = { "anthropic-version": "2023-06-01", "content-type": "application/json" };
     const call = (auth) => fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { ...base, ...auth }, body: payload });
     let r = await call({ "x-api-key": key });
