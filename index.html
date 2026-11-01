@@ -844,6 +844,15 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
         if(window.hbcTrack) hbcTrack('generate_lead',{service:svc,location:'assistant'}); })
       .catch(function(){ b.disabled=false; note.textContent=A?'حصلت مشكلة في الإرسال، جرّب تاني أو كلمنا واتساب.':'Sending failed. Please try again or use WhatsApp.'; }); });
     log.appendChild(c); log.scrollTop=log.scrollHeight; }
+  var lastSvc='Assistant chat';
+  function autoLead(t){ if(leadDone) return false; var m=t.match(/(\+?\d[\d\s()-]{7,}\d)/); if(!m) return false; var ph=m[1].replace(/[^\d+]/g,''); if(ph.replace(/\D/g,'').length<9) return false;
+    var nm=t.replace(m[1],' ').replace(/(اسمي|انا|أنا|my name is|name|رقمي|رقم|موبايل|mobile|phone|واتساب|whatsapp|[:،,.-])/gi,' ').replace(/\s+/g,' ').trim().slice(0,80);
+    if(nm.length<2){ var prev=hist.filter(function(x){return x.role==='user';}).slice(-2,-1)[0]; nm=prev&&prev.content.length<40?prev.content:'Chat visitor'; }
+    leadDone=true; var c=log.querySelector('.ai-lead'); if(c) c.remove();
+    var tr=hist.slice(-8).map(function(x){return (x.role==='user'?'Client: ':'Assistant ('+(who||'')+'): ')+x.content;}).join('\n').slice(0,1400);
+    var d=new URLSearchParams({'form-name':'leads',name:nm,phone:ph,email:'',service:lastSvc,source:'website assistant (typed in chat)',language:(site&&site.getAttribute('lang'))||'en',call_time:'Any time',consent:'yes',message:tr});
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:d.toString()}).then(function(r){ if(!r.ok) throw 0; if(window.hbcTrack) hbcTrack('generate_lead',{service:lastSvc,location:'assistant_typed'}); }).catch(function(){ leadDone=false; });
+    return true; }
   function save(){ try{ sessionStorage.setItem('hbcChat', JSON.stringify(hist.slice(-12))); }catch(e){} }
   fetch('/api/chat').then(function(r){ return r.ok?r.json():{}; }).then(function(j){ if(j&&j.ok){ fab.hidden=false; if(location.hash==='#ask') open(true); } }).catch(function(){});
   var P={zatouna:{en:'Zatouna',ar:'زتونة',img:'img/ai/zatouna.jpg',hi_en:"Hi, I'm Zatouna! 😄 Ask me anything about starting or running your company in the UAE.",hi_ar:'أهلاً، أنا زتونة! 😄 اسألني أي حاجة عن تأسيس شركتك أو إدارتها في الإمارات.'},lilia:{en:'Lilia',ar:'ليليا',img:'img/ai/lilia.jpg',hi_en:"Hello, I'm Lilia. 🌸 How can I help you with your company today?",hi_ar:'أهلاً بيك، أنا ليليا 🌸 أقدر أساعدك إزاي في شركتك النهارده؟'}};
@@ -861,10 +870,11 @@ window.HBC_INTEGRATIONS={googleAdsId:'',googleAdsLeadLabel:'',metaPixelId:''};
   document.getElementById('aiX').addEventListener('click',function(){ open(false); });
   form.addEventListener('submit',function(e){ e.preventDefault(); var t=inp.value.trim(); if(!t) return; inp.value='';
     add('me',t); hist.push({role:'user',content:t}); save();
+    var sent=autoLead(t);
     var w=add('bot', ar()?'…بيكتب':'Typing…'); w.classList.add('wait');
-    fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,persona:who})})
+    fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,persona:who,leadSent:sent})})
       .then(function(r){ return r.json(); })
-      .then(function(j){ w.classList.remove('wait'); if(j.reply){ var m=j.reply.match(/\[\[QUOTE:([^\]]*)\]\]/), clean=j.reply.replace(/\s*\[\[QUOTE:[^\]]*\]\]\s*/g,'').trim(); w.textContent=clean; hist.push({role:'assistant',content:clean}); save(); if(m||/WhatsApp|واتساب|عرض سعر|written quote/i.test(clean)) leadCard((m&&m[1].trim())||'General enquiry'); } else throw 0; })
+      .then(function(j){ w.classList.remove('wait'); if(j.reply){ var m=j.reply.match(/\[\[QUOTE:([^\]]*)\]\]/), clean=j.reply.replace(/\s*\[\[QUOTE:[^\]]*\]\]\s*/g,'').trim(); w.textContent=clean; hist.push({role:'assistant',content:clean}); save(); if(m&&m[1].trim()) lastSvc=m[1].trim(); if(m||/WhatsApp|واتساب|عرض سعر|written quote/i.test(clean)) leadCard((m&&m[1].trim())||'General enquiry'); } else throw 0; })
       .catch(function(){ w.classList.remove('wait'); w.textContent= ar()?'حصلت مشكلة. كلمنا على واتساب ‎+971 56 346 9000':'Something went wrong. Please WhatsApp us on +971 56 346 9000.'; hist.pop(); save(); });
   });
 })();

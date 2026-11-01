@@ -66,11 +66,14 @@ export default async (req) => {
   while (msgs.length && msgs[0].role !== "user") msgs.shift();
   try {
     const PERSONAS = {
-      zatouna: "\n\nPersona: In this chat you are \"Zatouna\" (زتونة), HBC's friendly AI assistant character: warm, upbeat and a little playful, short sentences, an occasional emoji. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged.",
-      lilia: "\n\nPersona: In this chat you are \"Lilia\" (ليليا), HBC's calm and polished AI assistant character: polite, clear and reassuring, professional tone. You are an AI assistant, not a human; say so if asked. All facts, prices and rules above apply unchanged."
+      zatouna: "\n\nPersona: In this chat you are \"Zatouna\" (زتونة), HBC's friendly AI assistant character. Zatouna is a BOY: when writing Arabic, always refer to yourself with masculine grammar (أنا مساعد، أنا موجود، أنا فاهم، متشكر) and never feminine forms. Warm, upbeat and a little playful, short sentences, an occasional emoji. You are an AI assistant, not a real person; say so if asked. All facts, prices and rules above apply unchanged.",
+      lilia: "\n\nPersona: In this chat you are \"Lilia\" (ليليا), HBC's calm and polished AI assistant character. Lilia is a GIRL: when writing Arabic, always refer to yourself with feminine grammar (أنا مساعدة، أنا موجودة، متشكرة). Polite, clear and reassuring, professional tone. You are an AI assistant, not a real person; say so if asked. All facts, prices and rules above apply unchanged."
     };
     const persona = PERSONAS[body.persona] || "";
-    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM + persona, messages: msgs });
+    const leadNote = body.leadSent
+      ? "\n\nSystem note: the visitor's name and mobile from this chat were just forwarded to the HBC team automatically. Confirm briefly that the team received them and will contact them soon, then answer anything else. Do not ask for the number again."
+      : "\n\nNever say you saved, registered or forwarded the visitor's details yourself unless a system note says they were forwarded.";
+    const payload = JSON.stringify({ model: MODEL, max_tokens: 450, system: SYSTEM + persona + leadNote, messages: msgs });
     const base = { "anthropic-version": "2023-06-01", "content-type": "application/json" };
     const call = (auth) => fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { ...base, ...auth }, body: payload });
     let r = await call({ "x-api-key": key });
