@@ -679,3 +679,6 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .gd-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}@media(max-width:900px){.gd-grid{grid-template-columns:repeat(2,1fr)}}
 .gd{display:block;text-decoration:none;color:#011F43;font-weight:700;font-size:.9rem;text-align:center}.gd img{width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;display:block;box-shadow:0 8px 20px rgba(1,31,67,.15);margin-bottom:6px}
 .site[dir="rtl"] .gd img[data-l="en"],.site[dir="ltr"] .gd img[data-l="ar"]{display:none}
+
+.law-note{display:block;margin-top:6px;font-size:.78rem;color:#8A6420;text-decoration:underline;text-underline-offset:2px}
+.law-foot{text-decoration:underline;text-underline-offset:2px;color:#D3A45F!important}
