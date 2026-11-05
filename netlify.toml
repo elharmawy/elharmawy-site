@@ -12,6 +12,12 @@
   [headers.values]
     Content-Type = "application/manifest+json"
 
+[[headers]]
+  for = "/hbc.vcf"
+  [headers.values]
+    Content-Type = "text/vcard; charset=utf-8"
+    Content-Disposition = "attachment; filename=\"El-Harmawy-HBC.vcf\""
+
 [[redirects]]
   from = "/qr"
   to = "/links?utm_source=qr_card&utm_medium=print"
