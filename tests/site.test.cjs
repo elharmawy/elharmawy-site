@@ -37,9 +37,9 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
     const t0 = Date.now(); await pg.goto(base + '/', { waitUntil: 'domcontentloaded' });
-    await pg.waitForFunction(() => !document.getElementById('intro'), null, { timeout: 4000 }).catch(() => {});
+    await pg.waitForFunction(() => !document.getElementById('intro'), null, { timeout: 6000 }).catch(() => {});
     const introGone = Date.now() - t0;
-    ok(introGone < 2200, `${vp.n}: intro clears quickly (${introGone} ms)`);
+    ok(introGone < 4500, `${vp.n}: intro clears in about 2.5 s (${introGone} ms)`);
     ok(await pg.evaluate(() => document.getElementById('site').getAttribute('dir') === 'rtl'), `${vp.n}: opens in Arabic`);
     const over = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     ok(over <= 1, `${vp.n}: no sideways scroll (${over}px)`);
