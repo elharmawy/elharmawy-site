@@ -21,6 +21,11 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok(!/Amiri Decree|المرسوم الأميري|مرسوم الأميري|Share capital|رأس المال 100|58667/.test(foot), 'footer has no capital, decree or licence number');
   ok(/value="Investor visa/.test(html) && /value="Golden visa/.test(html), 'investor + golden visa in the form');
   ok(/subject to (the )?UAE laws|in accordance with the laws and regulations of the United Arab Emirates/.test(html), 'UAE laws line present');
+  const man = JSON.parse(fs.existsSync(path.join(root,'img/watermarked.json')) ? fs.readFileSync(path.join(root,'img/watermarked.json'),'utf8') : '{}');
+  const crypto = require('crypto');
+  const imgs = [].concat(...['img/res','img/svc','img/ai'].map(d => fs.readdirSync(path.join(root,d)).filter(f=>/\.(jpe?g|png)$/i.test(f)).map(f=>d+'/'+f)), ['founder.jpg','og-image.png']);
+  const bad = imgs.filter(f => man[f] !== crypto.createHash('sha1').update(fs.readFileSync(path.join(root,f))).digest('hex'));
+  ok(bad.length === 0, 'every site image carries the watermark' + (bad.length ? ' (missing: ' + bad.slice(0,5).join(', ') + ')' : ''));
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
