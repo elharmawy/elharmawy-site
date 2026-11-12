@@ -1,3 +1,11 @@
+# Search engines and AI search (ChatGPT search uses OAI-SearchBot; links opened from ChatGPT use ChatGPT-User)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: *
 Allow: /
+
 Sitemap: https://www.elharmawy.com/sitemap.xml
