@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فكّرني بالتجديد | الهرماوي لاستشارات الأعمال</title>
+<meta name="description" content="تذكير مجاني قبل انتهاء الرخصة التجارية وبطاقة المنشأة وعقد الإيجار، في تقويم موبايلك وعلى الواتساب.">
+<link rel="canonical" href="https://elharmawy.com/renew">
+<link rel="icon" href="favicon.png">
+<meta name="theme-color" content="#011F43">
+<meta property="og:type" content="website"><meta property="og:title" content="فكّرني بالتجديد"><meta property="og:description" content="تذكير مجاني قبل انتهاء الرخصة التجارية وبطاقة المنشأة وعقد الإيجار، في تقويم موبايلك وعلى الواتساب."><meta property="og:url" content="https://elharmawy.com/renew"><meta property="og:image" content="https://elharmawy.com/og-image.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M1BHSYLT4R"></script>
+<script src="track.js?v=20261112"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="site.css?v=20261112b">
+<link rel="stylesheet" href="tools.css?v=20261112b">
+
+</head>
+<body data-page="renew">
+<div class="site" id="site" dir="rtl" lang="ar">
+<header class="top"><div class="wrap">
+  <a class="brand" href="./" aria-label="El Harmawy Business Consultancy"><img src="logo.png" alt="El Harmawy Business Consultancy F.Z.E"></a>
+  <nav class="nav" aria-label="Main"><a href="./"><span data-l="en">Home</span><span data-l="ar">الرئيسية</span></a><a href="start"><span data-l="en">Company setup</span><span data-l="ar">تأسيس الشركات</span></a><a href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a><a href="book"><span data-l="en">Book a consultation</span><span data-l="ar">احجز استشارة</span></a><a href="guides/"><span data-l="en">Guides</span><span data-l="ar">أدلة</span></a></nav>
+  <button class="lang" id="langBtn" type="button" aria-label="Switch language"><span data-l="en">العربية</span><span data-l="ar">English</span></button>
+</div></header>
+<main class="tool"><div class="wrap">
+
+<div class="eyebrow"><span data-l="en">Client tools</span><span data-l="ar">أدوات العملاء</span></div>
+<h1><span data-l="en">Never miss a renewal</span><span data-l="ar">فكّرني بالتجديد</span></h1>
+<p class="lead"><span data-l="en">Enter your expiry dates. You get reminders in your own phone calendar right away, and our team reminds you on WhatsApp a month before.</span><span data-l="ar">اكتب مواعيد الانتهاء. هتنزل لك تذكيرات في تقويم موبايلك على طول، وفريقنا هيفكّرك على الواتساب قبلها بشهر.</span></p>
+<div class="answer"><b><span data-l="en">WHY IT MATTERS</span><span data-l="ar">ليه مهم؟</span></b><span data-l="en">Late licence renewals can bring fines and can block government transactions, visas and bank operations until the licence is renewed.</span><span data-l="ar">التأخير في تجديد الرخصة ممكن يجيب غرامات، ويوقّف معاملات الشركة الحكومية والبنكية لحد ما تتجدد.</span></div>
+<div class="card2">
+<form class="tform" id="renForm" novalidate>
+  <p class="hp"><label>Leave empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p><div class="two">
+  <label><span data-l="en">Your name</span><span data-l="ar">الاسم</span><input name="name" autocomplete="name" required></label>
+  <label><span data-l="en">Mobile / WhatsApp</span><span data-l="ar">الموبايل / واتساب</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05x xxx xxxx" required></label>
+</div>
+  <label><span data-l="en">Company name (optional)</span><span data-l="ar">اسم الشركة (اختياري)</span><input name="company" autocomplete="organization"></label>
+  <div class="two">
+    <label><span data-l="en">Trade licence expiry</span><span data-l="ar">انتهاء الرخصة التجارية</span><input type="date" name="lic" required></label>
+    <label><span data-l="en">Licence issued in</span><span data-l="ar">الرخصة صادرة من</span><select name="em"><option value="Ajman Free Zone">منطقة عجمان الحرة</option><option value="Ajman">عجمان</option><option value="Sharjah">الشارقة</option><option value="Dubai">دبي</option><option value="Abu Dhabi">أبوظبي</option><option value="Other free zone">منطقة حرة أخرى</option><option value="Other">أخرى</option></select></label>
+  </div>
+  <div class="two">
+    <label><span data-l="en">Establishment card expiry (optional)</span><span data-l="ar">انتهاء بطاقة المنشأة (اختياري)</span><input type="date" name="est"></label>
+    <label><span data-l="en">Tenancy contract expiry (optional)</span><span data-l="ar">انتهاء عقد الإيجار (اختياري)</span><input type="date" name="ten"></label>
+  </div>
+  <p class="err" id="rErr" hidden></p>
+  <div class="tbtns"><button class="btn btn-gold" type="submit" id="rBtn"><span data-l="en">Set my reminders</span><span data-l="ar">فعّل التذكيرات</span></button></div>
+  <small class="hint"><span data-l="en">We only use your details to remind you about these dates.</span><span data-l="ar">بياناتك بنستخدمها بس عشان نفكّرك بالمواعيد دي.</span></small>
+</form>
+<div id="rOk" class="ok-box" hidden><h3><span data-l="en">Done. Reminders are set.</span><span data-l="ar">تمام، التذكيرات اتفعّلت.</span></h3><p><span data-l="en">Your calendar file downloaded. Open it to add the reminders to your phone. Our team will message you on WhatsApp a month before each date.</span><span data-l="ar">نزل لك ملف تقويم، افتحه عشان التذكيرات تتضاف على موبايلك. وفريقنا هيبعتلك على الواتساب قبل كل ميعاد بشهر.</span></p>
+<div class="tbtns"><button class="btn btn-ghost2" type="button" id="rIcs"><span data-l="en">Download the calendar file again</span><span data-l="ar">نزّل ملف التقويم تاني</span></button><a class="btn btn-wa" href="https://wa.me/971563469000?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%AC%D8%AF%D9%91%D8%AF%20%D8%B1%D8%AE%D8%B5%D8%A9%20%D8%B4%D8%B1%D9%83%D8%AA%D9%8A." target="_blank" rel="noopener"><span data-l="en">Renew with us now</span><span data-l="ar">جدّد معانا دلوقتي</span></a></div></div>
+</div>
+<p class="law-line"><span data-l="en">Prices and any approvals are subject to the laws of the United Arab Emirates and the decision of the competent authority.</span><span data-l="ar">الأسعار وأي موافقات تخضع لقوانين دولة الإمارات العربية المتحدة وقرار الجهة المختصة.</span></p>
+</div></main>
+<footer class="legal"><div class="wrap">
+  <div class="fcols">
+    <div><h3><span data-l="en">Client tools</span><span data-l="ar">أدوات العملاء</span></h3><ul><li><a href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a></li><li><a href="renew"><span data-l="en">Renewal reminder</span><span data-l="ar">فكّرني بالتجديد</span></a></li><li><a href="book"><span data-l="en">Book a consultation</span><span data-l="ar">احجز استشارة</span></a></li><li><a href="check"><span data-l="en">Company health check</span><span data-l="ar">شركتك سليمة؟</span></a></li><li><a href="e-invoicing"><span data-l="en">E-invoicing guide</span><span data-l="ar">دليل الفوترة الإلكترونية</span></a></li></ul></div>
+    <div><h3><span data-l="en">Company setup</span><span data-l="ar">تأسيس الشركات</span></h3><ul><li><a href="company-setup-ajman"><span data-l="en">Company setup in Ajman</span><span data-l="ar">تأسيس شركة في عجمان</span></a></li><li><a href="company-setup-sharjah"><span data-l="en">Company setup in Sharjah</span><span data-l="ar">تأسيس شركة في الشارقة</span></a></li><li><a href="company-setup-dubai"><span data-l="en">Company setup in Dubai</span><span data-l="ar">تأسيس شركة في دبي</span></a></li><li><a href="zh"><span data-l="en">中文</span><span data-l="ar">中文</span></a></li></ul></div>
+    <div><h3><span data-l="en">Contact</span><span data-l="ar">تواصل معنا</span></h3><ul><li dir="ltr"><a href="https://wa.me/971563469000" target="_blank" rel="noopener">WhatsApp +971 56 346 9000</a></li><li><a href="mailto:info@elharmawy.com">info@elharmawy.com</a></li><li><a href="pay"><span data-l="en">Bank transfer details</span><span data-l="ar">بيانات التحويل البنكي</span></a></li></ul></div>
+  </div>
+  <p>EL HARMAWY BUSINESS CONSULTANCY - F.Z.E · <span data-l="en">Ajman Free Zone, UAE</span><span data-l="ar">منطقة عجمان الحرة، الإمارات</span> · <a href="privacy.html"><span data-l="en">Privacy Policy</span><span data-l="ar">سياسة الخصوصية</span></a> · <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a></p>
+</div></footer>
+</div>
+<script src="tools.js?v=20261112a"></script>
+<script>
+var f=document.getElementById('renForm'),err=document.getElementById('rErr'),btn=document.getElementById('rBtn'),evs=[];
+function d(v){if(!v)return null;var p=v.split('-');return new Date(+p[0],+p[1]-1,+p[2],9,0,0);}
+function ev(dt,en,ar){if(!dt)return;var t=HBC.t(en,ar);evs.push({start:dt,allDay:true,title:t,desc:HBC.t('Renew with El Harmawy: WhatsApp +971 56 346 9000 · elharmawy.com','جدّد مع الهرماوي: واتساب 056 346 9000 · elharmawy.com'),alarms:['-P30D','-P7D','-P1D']});}
+f.addEventListener('submit',function(e){e.preventDefault();err.hidden=true;var fd=new FormData(f);
+ if(fd.get('company_website'))return;
+ if(!fd.get('name')||!HBC.validPhone(fd.get('phone'))||!fd.get('lic')){err.textContent=HBC.t('Please add your name, mobile number and licence expiry date.','اكتب الاسم ورقم الموبايل وميعاد انتهاء الرخصة.');err.hidden=false;return;}
+ evs=[];ev(d(fd.get('lic')),'Trade licence expires','انتهاء الرخصة التجارية');ev(d(fd.get('est')),'Establishment card expires','انتهاء بطاقة المنشأة');ev(d(fd.get('ten')),'Tenancy contract expires','انتهاء عقد الإيجار');
+ btn.disabled=true;
+ HBC.lead({name:fd.get('name'),phone:fd.get('phone'),company:fd.get('company'),service:'Licence renewal reminder',source:'renew_tool',
+  message:'Licence expiry: '+fd.get('lic')+' ('+fd.get('em')+')'+(fd.get('est')?' · Establishment card: '+fd.get('est'):'')+(fd.get('ten')?' · Tenancy: '+fd.get('ten'):'')})
+ .then(function(){HBC.track('generate_lead',{service:'Licence renewal reminder'});HBC.ics(evs,'elharmawy-renewals.ics');f.hidden=true;document.getElementById('rOk').hidden=false;})
+ .catch(function(){btn.disabled=false;err.textContent=HBC.t('Could not send. Please try again or message us on WhatsApp.','ماوصلش. جرّب تاني أو ابعتلنا على الواتساب.');err.hidden=false;});});
+document.getElementById('rIcs').addEventListener('click',function(){HBC.ics(evs,'elharmawy-renewals.ics');});
+</script>
+</body>
+</html>

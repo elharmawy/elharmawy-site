@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>احجز استشارة | الهرماوي لاستشارات الأعمال</title>
+<meta name="description" content="احجز استشارة مجانية مع الهرماوي لاستشارات الأعمال: تأسيس شركة، محاسبة، حساب بنكي، معاملات حكومية.">
+<link rel="canonical" href="https://elharmawy.com/book">
+<link rel="icon" href="favicon.png">
+<meta name="theme-color" content="#011F43">
+<meta property="og:type" content="website"><meta property="og:title" content="احجز استشارة"><meta property="og:description" content="احجز استشارة مجانية مع الهرماوي لاستشارات الأعمال: تأسيس شركة، محاسبة، حساب بنكي، معاملات حكومية."><meta property="og:url" content="https://elharmawy.com/book"><meta property="og:image" content="https://elharmawy.com/og-image.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M1BHSYLT4R"></script>
+<script src="track.js?v=20261112"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="site.css?v=20261112b">
+<link rel="stylesheet" href="tools.css?v=20261112b">
+
+</head>
+<body data-page="book">
+<div class="site" id="site" dir="rtl" lang="ar">
+<header class="top"><div class="wrap">
+  <a class="brand" href="./" aria-label="El Harmawy Business Consultancy"><img src="logo.png" alt="El Harmawy Business Consultancy F.Z.E"></a>
+  <nav class="nav" aria-label="Main"><a href="./"><span data-l="en">Home</span><span data-l="ar">الرئيسية</span></a><a href="start"><span data-l="en">Company setup</span><span data-l="ar">تأسيس الشركات</span></a><a href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a><a href="book"><span data-l="en">Book a consultation</span><span data-l="ar">احجز استشارة</span></a><a href="guides/"><span data-l="en">Guides</span><span data-l="ar">أدلة</span></a></nav>
+  <button class="lang" id="langBtn" type="button" aria-label="Switch language"><span data-l="en">العربية</span><span data-l="ar">English</span></button>
+</div></header>
+<main class="tool"><div class="wrap">
+
+<div class="eyebrow"><span data-l="en">Client tools</span><span data-l="ar">أدوات العملاء</span></div>
+<h1><span data-l="en">Book a free consultation</span><span data-l="ar">احجز استشارة مجانية</span></h1>
+<p class="lead"><span data-l="en">Pick a day and a time. We confirm the appointment with you on WhatsApp.</span><span data-l="ar">اختار اليوم والساعة، وإحنا نأكد معاك الميعاد على الواتساب.</span></p>
+<div class="card2">
+<form class="tform" id="bkForm" novalidate>
+  <p class="hp"><label>Leave empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p><div class="two">
+  <label><span data-l="en">Your name</span><span data-l="ar">الاسم</span><input name="name" autocomplete="name" required></label>
+  <label><span data-l="en">Mobile / WhatsApp</span><span data-l="ar">الموبايل / واتساب</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05x xxx xxxx" required></label>
+</div>
+  <div class="two">
+    <label><span data-l="en">Topic</span><span data-l="ar">الموضوع</span><select name="topic">
+      <option value="Company setup">تأسيس شركة</option><option value="Accounting & bookkeeping">المحاسبة ومسك الدفاتر</option>
+      <option value="Monthly package">باقة شهرية للشركة</option><option value="Corporate bank account">الحساب البنكي للشركة</option>
+      <option value="Licence renewal / amendment">تجديد أو تعديل رخصة</option><option value="Government approvals">موافقات حكومية</option>
+      <option value="Legal translation / attestation">ترجمة قانونية أو تصديق</option><option value="Other">موضوع تاني</option></select></label>
+    <label><span data-l="en">How</span><span data-l="ar">إزاي</span><select name="mode"><option value="WhatsApp call">مكالمة واتساب</option><option value="Phone call">مكالمة تليفون</option><option value="Office visit (Ajman Free Zone)">زيارة المكتب (منطقة عجمان الحرة)</option></select></label>
+  </div>
+  <label><span data-l="en">Day</span><span data-l="ar">اليوم</span><select name="day" id="bkDay" required></select></label>
+  <fieldset style="border:0;padding:0;margin:0"><legend style="font-weight:600;color:var(--navy);margin-bottom:6px"><span data-l="en">Time (UAE time)</span><span data-l="ar">الساعة (بتوقيت الإمارات)</span></legend><div class="slots" id="bkSlots"></div></fieldset>
+  <p class="err" id="bErr" hidden></p>
+  <div class="tbtns"><button class="btn btn-gold" type="submit" id="bBtn"><span data-l="en">Request this appointment</span><span data-l="ar">اطلب الميعاد ده</span></button></div>
+</form>
+<div id="bOk" class="ok-box" hidden><h3><span data-l="en">Request received</span><span data-l="ar">طلبك وصل</span></h3><p id="bOkTxt"></p>
+<div class="tbtns"><button class="btn btn-ghost2" type="button" id="bIcs"><span data-l="en">Add to my calendar</span><span data-l="ar">ضيفه على التقويم</span></button><a class="btn btn-wa" id="bWa" target="_blank" rel="noopener"><span data-l="en">Confirm on WhatsApp</span><span data-l="ar">أكّد على الواتساب</span></a></div></div>
+</div>
+<p class="mini-foot"><span data-l="en">Working days Monday to Saturday, 10 am to 6 pm.</span><span data-l="ar">أيام العمل من الاتنين للسبت، من 10 الصبح لـ 6 المغرب.</span></p>
+<p class="law-line"><span data-l="en">Prices and any approvals are subject to the laws of the United Arab Emirates and the decision of the competent authority.</span><span data-l="ar">الأسعار وأي موافقات تخضع لقوانين دولة الإمارات العربية المتحدة وقرار الجهة المختصة.</span></p>
+</div></main>
+<footer class="legal"><div class="wrap">
+  <div class="fcols">
+    <div><h3><span data-l="en">Client tools</span><span data-l="ar">أدوات العملاء</span></h3><ul><li><a href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a></li><li><a href="renew"><span data-l="en">Renewal reminder</span><span data-l="ar">فكّرني بالتجديد</span></a></li><li><a href="book"><span data-l="en">Book a consultation</span><span data-l="ar">احجز استشارة</span></a></li><li><a href="check"><span data-l="en">Company health check</span><span data-l="ar">شركتك سليمة؟</span></a></li><li><a href="e-invoicing"><span data-l="en">E-invoicing guide</span><span data-l="ar">دليل الفوترة الإلكترونية</span></a></li></ul></div>
+    <div><h3><span data-l="en">Company setup</span><span data-l="ar">تأسيس الشركات</span></h3><ul><li><a href="company-setup-ajman"><span data-l="en">Company setup in Ajman</span><span data-l="ar">تأسيس شركة في عجمان</span></a></li><li><a href="company-setup-sharjah"><span data-l="en">Company setup in Sharjah</span><span data-l="ar">تأسيس شركة في الشارقة</span></a></li><li><a href="company-setup-dubai"><span data-l="en">Company setup in Dubai</span><span data-l="ar">تأسيس شركة في دبي</span></a></li><li><a href="zh"><span data-l="en">中文</span><span data-l="ar">中文</span></a></li></ul></div>
+    <div><h3><span data-l="en">Contact</span><span data-l="ar">تواصل معنا</span></h3><ul><li dir="ltr"><a href="https://wa.me/971563469000" target="_blank" rel="noopener">WhatsApp +971 56 346 9000</a></li><li><a href="mailto:info@elharmawy.com">info@elharmawy.com</a></li><li><a href="pay"><span data-l="en">Bank transfer details</span><span data-l="ar">بيانات التحويل البنكي</span></a></li></ul></div>
+  </div>
+  <p>EL HARMAWY BUSINESS CONSULTANCY - F.Z.E · <span data-l="en">Ajman Free Zone, UAE</span><span data-l="ar">منطقة عجمان الحرة، الإمارات</span> · <a href="privacy.html"><span data-l="en">Privacy Policy</span><span data-l="ar">سياسة الخصوصية</span></a> · <a href="terms.html"><span data-l="en">Terms</span><span data-l="ar">الشروط</span></a></p>
+</div></footer>
+</div>
+<script src="tools.js?v=20261112a"></script>
+<script>
+var dayS=document.getElementById('bkDay'),slots=document.getElementById('bkSlots'),evt=null;
+var DN={en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],ar:['الأحد','الاتنين','التلات','الأربع','الخميس','الجمعة','السبت']};
+function fillDays(){var cur=dayS.value;dayS.innerHTML='';var d=new Date();d.setHours(0,0,0,0);var n=0;
+ while(n<12){d.setDate(d.getDate()+1);if(d.getDay()===0)continue;var v=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
+  var o=document.createElement('option');o.value=v;o.textContent=DN[HBC.lang()==='ar'?'ar':'en'][d.getDay()]+' '+d.getDate()+'/'+(d.getMonth()+1);dayS.appendChild(o);n++;}
+ if(cur)dayS.value=cur;}
+function fillSlots(){if(slots.children.length)return;['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'].forEach(function(t,i){var l=document.createElement('label');l.innerHTML='<input type="radio" name="time" value="'+t+'"'+(i===1?' checked':'')+'>'+t;slots.appendChild(l);});}
+fillDays();fillSlots();document.addEventListener('hbc-lang',fillDays);
+var f=document.getElementById('bkForm'),err=document.getElementById('bErr'),btn=document.getElementById('bBtn');
+f.addEventListener('submit',function(e){e.preventDefault();err.hidden=true;var fd=new FormData(f);if(fd.get('company_website'))return;
+ if(!fd.get('name')||!HBC.validPhone(fd.get('phone'))||!fd.get('day')||!fd.get('time')){err.textContent=HBC.t('Please add your name, mobile, day and time.','اكتب الاسم والموبايل واختار اليوم والساعة.');err.hidden=false;return;}
+ var when=fd.get('day')+' '+fd.get('time'),p=fd.get('day').split('-'),h=fd.get('time').split(':');
+ var start=new Date(Date.UTC(+p[0],+p[1]-1,+p[2],+h[0]-4,0,0));
+ evt={start:start,end:new Date(start.getTime()+30*60000),title:HBC.t('Consultation with El Harmawy (to be confirmed)','استشارة مع الهرماوي (مستنية تأكيد)'),desc:fd.get('topic')+' · '+fd.get('mode')+' · WhatsApp +971 56 346 9000',alarms:['-PT1H']};
+ btn.disabled=true;
+ HBC.lead({name:fd.get('name'),phone:fd.get('phone'),service:'Consultation booking',call_time:when+' (UAE)',source:'book_tool',message:'Topic: '+fd.get('topic')+' · Mode: '+fd.get('mode')})
+ .then(function(){HBC.track('generate_lead',{service:'Consultation booking'});f.hidden=true;document.getElementById('bOk').hidden=false;
+  document.getElementById('bOkTxt').textContent=HBC.t('You asked for '+when+' (UAE time). We will confirm it with you on WhatsApp. The time is final only after we confirm.','طلبت ميعاد '+when+' بتوقيت الإمارات. هنأكد معاك على الواتساب، والميعاد بيتثبت بعد تأكيدنا.');
+  document.getElementById('bWa').href=HBC.wa('السلام عليكم، طلبت ميعاد استشارة '+when+' بخصوص: '+fd.get('topic')+'. الاسم: '+fd.get('name'));})
+ .catch(function(){btn.disabled=false;err.textContent=HBC.t('Could not send. Please try again or message us on WhatsApp.','ماوصلش. جرّب تاني أو ابعتلنا على الواتساب.');err.hidden=false;});});
+document.getElementById('bIcs').addEventListener('click',function(){if(evt)HBC.ics([evt],'elharmawy-consultation.ics');});
+</script>
+</body>
+</html>
