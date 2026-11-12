@@ -2,7 +2,7 @@
 // The sheet holds no names or phone numbers, only: code | service | step (1-5) | step name | status | last update | note to client.
 // The sheet's CSV link comes from env var TRACK_CSV_URL (Netlify > Site configuration > Environment variables),
 // or from TRACK_CSV below when the env var is not set.
-const TRACK_CSV = "";
+const TRACK_CSV = "https://docs.google.com/spreadsheets/d/1dgCIIW6JwdbMUARhy-W3oLtX3Dd4LphCdl0xwmxKSsQ/gviz/tq?tqx=out:csv&sheet=Track";
 let cache = { at: 0, rows: null };
 
 function parseCSV(t) {
@@ -29,7 +29,7 @@ export default async (req) => {
   try {
     if (!cache.rows || Date.now() - cache.at > 60000) {
       const r = await fetch(url, { redirect: "follow" });
-      if (!r.ok) throw new Error("sheet " + r.status);
+      if (!r.ok || /text\/html/.test(r.headers.get("content-type") || "")) throw new Error("sheet not shared " + r.status);
       cache = { at: Date.now(), rows: parseCSV(await r.text()) };
     }
     const hit = cache.rows.slice(1).find((r) => norm(r[0]) === code);
