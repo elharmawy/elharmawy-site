@@ -22,3 +22,8 @@
   from = "/qr"
   to = "/links?utm_source=qr_card&utm_medium=print"
   status = 302
+
+[[redirects]]
+  from = "/iqama"
+  to = "/start"
+  status = 301

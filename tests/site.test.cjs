@@ -19,22 +19,24 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok(/1,780/.test(html) && /Abu Dhabi/.test(html), 'Abu Dhabi licence offer (AED 1,780) shown');
   const foot = html.slice(html.indexOf('<footer class="legal">'), html.indexOf('</footer>'));
   ok(!/Amiri Decree|المرسوم الأميري|مرسوم الأميري|Share capital|رأس المال 100|58667/.test(foot), 'footer has no capital, decree or licence number');
-  ok(/value="Investor visa/.test(html) && /value="Golden visa/.test(html), 'investor + golden visa in the form');
+  ok(/value="Residency application assistance"/.test(html) && /value="Golden visa/.test(html), 'residency help + golden visa in the form');
   ok(/subject to (the )?UAE laws|in accordance with the laws and regulations of the United Arab Emirates/.test(html), 'UAE laws line present');
   const man = JSON.parse(fs.existsSync(path.join(root,'img/watermarked.json')) ? fs.readFileSync(path.join(root,'img/watermarked.json'),'utf8') : '{}');
   const crypto = require('crypto');
   const imgs = [].concat(...['img/res','img/res/t','img/svc','img/ai'].map(d => fs.readdirSync(path.join(root,d)).filter(f=>/\.(jpe?g|png|webp)$/i.test(f)).map(f=>d+'/'+f)), ['founder.jpg','og-image.png']);
   const bad = imgs.filter(f => man[f] !== crypto.createHash('sha1').update(fs.readFileSync(path.join(root,f))).digest('hex'));
   ok(bad.length === 0, 'every site image carries the watermark' + (bad.length ? ' (missing: ' + bad.slice(0,5).join(', ') + ')' : ''));
-  const iq = fs.readFileSync(path.join(root,'iqama.html'),'utf8');
-  ok(/wa\.me\/971563469000/.test(iq) && !/555128551/.test(iq), 'iqama page: WhatsApp goes to 056 346 9000');
-  ok(/تخضع لقوانين دولة الإمارات/.test(iq), 'iqama page: UAE laws line');
-  ok(/HBC · ELHARMAWY\.COM/.test(iq), 'iqama page: watermark');
-  ok(/مش بنوفّر فيزا عمل/.test(iq), 'iqama page: says we do not sell work visas');
+  { const bad=/إقامة مستثمر (لمدة )?سنتين|إقامتك بإسمك|من غير كفيل|عايز إقامة بإسمي|Investor visa \(2 years\)|2-year residency|إقامتك في الإمارات علينا|Your UAE residency, handled/;
+    for (const f of ['index.html','start.html','links.html','pay.html']) ok(!bad.test(fs.readFileSync(path.join(root,f),'utf8')), f+': no residency-selling wording'); }
+  const iq = fs.readFileSync(path.join(root,'start.html'),'utf8');
+  ok(/wa\.me\/971563469000/.test(iq) && !/555128551/.test(iq), 'start page: WhatsApp goes to 056 346 9000');
+  ok(/تخضع لقوانين دولة الإمارات/.test(iq), 'start page: UAE laws line');
+  ok(/HBC · ELHARMAWY\.COM/.test(iq), 'start page: watermark');
+  ok(/مش بنبيع إقامات/.test(iq), 'start page: says we do not sell work visas');
   const robots = fs.readFileSync(path.join(root,'robots.txt'),'utf8');
   ok(/User-agent: OAI-SearchBot\s+Allow: \//.test(robots) && !/Disallow: \/\s*$/m.test(robots), 'robots.txt lets ChatGPT search (OAI-SearchBot) read the site');
   const sm = fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
-  ok(!/https:\/\/www\.elharmawy\.com/.test(sm + robots) && /https:\/\/elharmawy\.com\/iqama/.test(sm), 'sitemap + robots use the main address elharmawy.com (no www redirect)');
+  ok(!/https:\/\/www\.elharmawy\.com/.test(sm + robots) && /https:\/\/elharmawy\.com\/start/.test(sm), 'sitemap + robots use the main address elharmawy.com (no www redirect)');
   ok(/rel="canonical" href="https:\/\/elharmawy\.com\/"/.test(html), 'home canonical is https://elharmawy.com/');
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
@@ -50,9 +52,9 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
     ok(wa, `${vp.n}: every WhatsApp link goes to 056 346 9000`);
     await pg.close();
   }
-  { const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); await pg.goto(base + '/iqama'); await pg.waitForTimeout(300);
-    const over = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); ok(over <= 1, 'iqama page: no sideways scroll on phone (' + over + 'px)');
-    ok(await pg.evaluate(() => document.dir === 'rtl' || document.documentElement.dir === 'rtl'), 'iqama page: Arabic right-to-left'); await pg.close(); }
+  { const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); await pg.goto(base + '/start'); await pg.waitForTimeout(300);
+    const over = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); ok(over <= 1, 'start page: no sideways scroll on phone (' + over + 'px)');
+    ok(await pg.evaluate(() => document.dir === 'rtl' || document.documentElement.dir === 'rtl'), 'start page: Arabic right-to-left'); await pg.close(); }
   await b.close(); srv.close();
   console.log(fails.length ? `\n${fails.length} failing` : '\nall passing'); process.exit(fails.length ? 1 : 0);
 })();
