@@ -23,9 +23,14 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok(/subject to (the )?UAE laws|in accordance with the laws and regulations of the United Arab Emirates/.test(html), 'UAE laws line present');
   const man = JSON.parse(fs.existsSync(path.join(root,'img/watermarked.json')) ? fs.readFileSync(path.join(root,'img/watermarked.json'),'utf8') : '{}');
   const crypto = require('crypto');
-  const imgs = [].concat(...['img/res','img/svc','img/ai'].map(d => fs.readdirSync(path.join(root,d)).filter(f=>/\.(jpe?g|png)$/i.test(f)).map(f=>d+'/'+f)), ['founder.jpg','og-image.png']);
+  const imgs = [].concat(...['img/res','img/res/t','img/svc','img/ai'].map(d => fs.readdirSync(path.join(root,d)).filter(f=>/\.(jpe?g|png|webp)$/i.test(f)).map(f=>d+'/'+f)), ['founder.jpg','og-image.png']);
   const bad = imgs.filter(f => man[f] !== crypto.createHash('sha1').update(fs.readFileSync(path.join(root,f))).digest('hex'));
   ok(bad.length === 0, 'every site image carries the watermark' + (bad.length ? ' (missing: ' + bad.slice(0,5).join(', ') + ')' : ''));
+  const iq = fs.readFileSync(path.join(root,'iqama.html'),'utf8');
+  ok(/wa\.me\/971563469000/.test(iq) && !/555128551/.test(iq), 'iqama page: WhatsApp goes to 056 346 9000');
+  ok(/تخضع لقوانين دولة الإمارات/.test(iq), 'iqama page: UAE laws line');
+  ok(/HBC · ELHARMAWY\.COM/.test(iq), 'iqama page: watermark');
+  ok(/مش بنوفّر فيزا عمل/.test(iq), 'iqama page: says we do not sell work visas');
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
@@ -40,6 +45,9 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
     ok(wa, `${vp.n}: every WhatsApp link goes to 056 346 9000`);
     await pg.close();
   }
+  { const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); await pg.goto(base + '/iqama'); await pg.waitForTimeout(300);
+    const over = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); ok(over <= 1, 'iqama page: no sideways scroll on phone (' + over + 'px)');
+    ok(await pg.evaluate(() => document.dir === 'rtl' || document.documentElement.dir === 'rtl'), 'iqama page: Arabic right-to-left'); await pg.close(); }
   await b.close(); srv.close();
   console.log(fails.length ? `\n${fails.length} failing` : '\nall passing'); process.exit(fails.length ? 1 : 0);
 })();
