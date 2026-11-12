@@ -17,7 +17,8 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok((html.match(/971563469000/g) || []).length >= 5, 'client WhatsApp number used');
   ok(/href="pay"/.test(html), 'payments page linked');
   ok(/1,780/.test(html) && /Abu Dhabi/.test(html), 'Abu Dhabi licence offer (AED 1,780) shown');
-  ok(/100,000/.test(html) && /Amiri Decree No\. 8 of 2021/.test(html) && /مرسوم الأميري رقم 8 لسنة 2021/.test(html), 'capital + Amiri decree in footer');
+  const foot = html.slice(html.indexOf('<footer class="legal">'), html.indexOf('</footer>'));
+  ok(!/Amiri Decree|المرسوم الأميري|مرسوم الأميري|Share capital|رأس المال 100|58667/.test(foot), 'footer has no capital, decree or licence number');
   ok(/value="Investor visa/.test(html) && /value="Golden visa/.test(html), 'investor + golden visa in the form');
   ok(/subject to (the )?UAE laws|in accordance with the laws and regulations of the United Arab Emirates/.test(html), 'UAE laws line present');
   const b = await chromium.launch();
