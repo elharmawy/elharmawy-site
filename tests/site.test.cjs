@@ -31,6 +31,8 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok(/تخضع لقوانين دولة الإمارات/.test(iq), 'iqama page: UAE laws line');
   ok(/HBC · ELHARMAWY\.COM/.test(iq), 'iqama page: watermark');
   ok(/مش بنوفّر فيزا عمل/.test(iq), 'iqama page: says we do not sell work visas');
+  const robots = fs.readFileSync(path.join(root,'robots.txt'),'utf8');
+  ok(/User-agent: OAI-SearchBot\s+Allow: \//.test(robots) && !/Disallow: \/\s*$/m.test(robots), 'robots.txt lets ChatGPT search (OAI-SearchBot) read the site');
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
