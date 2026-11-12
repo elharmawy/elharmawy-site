@@ -8,4 +8,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.elharmawy.com/sitemap.xml
+Sitemap: https://elharmawy.com/sitemap.xml
