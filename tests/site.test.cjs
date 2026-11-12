@@ -33,6 +33,9 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   ok(/مش بنوفّر فيزا عمل/.test(iq), 'iqama page: says we do not sell work visas');
   const robots = fs.readFileSync(path.join(root,'robots.txt'),'utf8');
   ok(/User-agent: OAI-SearchBot\s+Allow: \//.test(robots) && !/Disallow: \/\s*$/m.test(robots), 'robots.txt lets ChatGPT search (OAI-SearchBot) read the site');
+  const sm = fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
+  ok(!/https:\/\/www\.elharmawy\.com/.test(sm + robots) && /https:\/\/elharmawy\.com\/iqama/.test(sm), 'sitemap + robots use the main address elharmawy.com (no www redirect)');
+  ok(/rel="canonical" href="https:\/\/elharmawy\.com\/"/.test(html), 'home canonical is https://elharmawy.com/');
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
