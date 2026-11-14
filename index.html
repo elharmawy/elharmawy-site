@@ -34,7 +34,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css?v=20261114">
+<link rel="stylesheet" href="site.css?v=20261114b">
 <link rel="stylesheet" href="vendor/hd.css?v=1">
 
 </head>
@@ -68,7 +68,7 @@
       <a href="#contact"><span data-l="en">Contact</span><span data-l="ar">تواصل معنا</span></a>
       <a href="pay"><span data-l="en">Pay</span><span data-l="ar">الدفع والتحويل</span></a>
       <a href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a>
-      <a href="#register" class="nav-cta"><span data-l="en">Get a free call</span><span data-l="ar">احجز مكالمة</span></a>
+      <details class="nav-more"><summary><span data-l="en">More</span><span data-l="ar">المزيد</span></summary><div class="nav-more-list"><a data-more href="#solutions"><span data-l="en">Solutions</span><span data-l="ar">حلولنا</span></a><a data-more href="#videos"><span data-l="en">Videos</span><span data-l="ar">فيديوهات</span></a><a data-more href="#process"><span data-l="en">How we work</span><span data-l="ar">طريقة عملنا</span></a><a data-more href="#about"><span data-l="en">About</span><span data-l="ar">من نحن</span></a><a data-more href="pay"><span data-l="en">Pay</span><span data-l="ar">الدفع والتحويل</span></a><a data-more href="track"><span data-l="en">Track your file</span><span data-l="ar">تابع معاملتك</span></a><a data-more href="#faq"><span data-l="en">FAQ</span><span data-l="ar">الأسئلة</span></a><a data-more href="guides/"><span data-l="en">Guides</span><span data-l="ar">أدلة</span></a></div></details><a href="#register" class="nav-cta"><span data-l="en">Get a free call</span><span data-l="ar">احجز مكالمة</span></a>
     </nav>
     <button class="lang" id="langBtn" type="button" aria-label="Switch language"><span data-l="en">العربية</span><span data-l="ar">English</span></button>
   </div>
@@ -1236,5 +1236,6 @@ import * as H from "./vendor/hairline.js?v=1";
 const io=new IntersectionObserver((es)=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const f=H[e.target.dataset.hl];if(f){try{f(e.target,{play:true,intensity:.6,theme:"light"})}catch(err){}}}},{rootMargin:"200px"});
 document.querySelectorAll("[data-hl]").forEach((el)=>io.observe(el));
 </script>
+<script>document.addEventListener("click",function(e){var d=document.querySelector(".nav-more");if(d&&d.open&&(!d.contains(e.target)||e.target.closest("a")))d.open=false;});</script>
 </body>
 </html>
