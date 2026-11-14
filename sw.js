@@ -1,5 +1,5 @@
 // HBC app service worker: makes the site installable and opens offline with the last saved copy.
-const CACHE = "hbc-v31";
+const CACHE = "hbc-v32";
 const CORE = ["/", "/site.css", "/logo.png", "/favicon.png", "/founder.jpg", "/icons/icon-192.png", "/manifest.webmanifest"];
 
 self.addEventListener("install", e => {
