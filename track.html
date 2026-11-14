@@ -14,7 +14,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css?v=20261112b">
+<link rel="stylesheet" href="site.css?v=20261114c">
+<link rel="stylesheet" href="vendor/hd.css?v=1">
 <link rel="stylesheet" href="tools.css?v=20261112b">
 
 </head>
@@ -38,6 +39,7 @@
   </form>
 </div>
 <div id="tOut" hidden style="margin-top:18px"></div>
+<section class="demo-block" style="margin:34px 0"><h2><span data-l="en">How it looks</span><span data-l="ar">شكلها إزاي</span></h2><p><span data-l="en">A sample file, step by step.</span><span data-l="ar">ملف تجريبي، خطوة بخطوة.</span></p><div id="trackDemo"></div></section>
 <h2><span data-l="en">What the steps mean</span><span data-l="ar">معنى كل خطوة</span></h2>
 <ol class="steps2"><li><span data-l="en">Documents received</span><span data-l="ar">استلمنا الأوراق</span></li><li><span data-l="en">File prepared</span><span data-l="ar">جهّزنا الملف</span></li><li><span data-l="en">Submitted to the authority</span><span data-l="ar">اتقدّم للجهة</span></li><li><span data-l="en">Awaiting the authority</span><span data-l="ar">مستني قرار الجهة</span></li><li><span data-l="en">Completed</span><span data-l="ar">خلصت</span></li></ol>
 <p class="mini-foot"><span data-l="en">No code yet? Ask us on WhatsApp and we will send it.</span><span data-l="ar">ما عندكش كود؟ اطلبه مننا على الواتساب.</span> <a class="btn btn-ghost2" href="https://wa.me/971563469000?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D9%83%D9%88%D8%AF%20%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9%20%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%AA%D9%8A." target="_blank" rel="noopener"><span data-l="en">Ask for my code</span><span data-l="ar">اطلب الكود</span></a></p>
@@ -53,6 +55,8 @@
 </div></footer>
 </div>
 <script src="tools.js?v=20261112a"></script>
+<script src="vendor/hd.js?v=1" defer></script>
+<script src="live-demos.js?v=1" defer></script>
 <script>
 var STEPS=[["Documents received", "استلمنا الأوراق"], ["File prepared", "جهّزنا الملف"], ["Submitted to the authority", "اتقدّم للجهة"], ["Awaiting the authority", "مستني قرار الجهة"], ["Completed", "خلصت"]];
 var f=document.getElementById('trackForm'),out=document.getElementById('tOut'),err=document.getElementById('tErr'),btn=document.getElementById('tBtn');
