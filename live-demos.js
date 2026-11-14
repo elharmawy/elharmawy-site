@@ -30,8 +30,8 @@
       send: 'Send request on WhatsApp', wa: 'Hello, I need a university degree issued in Egypt attested, plus legal translation.',
       track: 'Track your file', tsub: 'Enter the file code we sent you on WhatsApp to see where your transaction stands.', code: 'HBC-2611-AT', tl: ['Documents received', 'File prepared', 'Submitted to the authority', 'Awaiting the authority', 'Completed'], sample: 'Sample' }
   };
-  function buildAttest(lang) {
-    var T = AT[lang], ar = lang === 'ar';
+  function buildAttest(lang, cfg) {
+    var T = (cfg || AT)[lang], ar = lang === 'ar';
     var form = '<div class="lv-chips">' + T.svc.map(function (s, i) { return '<span class="c' + i + '">' + esc(s) + '</span>'; }).join('') + '</div>' +
       '<div class="lv-row"><label>' + esc(T.doc) + '<i class="f1"></i></label><label>' + esc(T.country) + '<i class="f2"></i></label></div>';
     var s1 = { id: 'choose', name: T.steps[0], dur: 5.4, html: shell(ar, T.title, T.sub, form),
@@ -92,9 +92,49 @@
     return { steps: [s1, s2, s3], tabs: [T.tab], label: T.label };
   }
 
+
+  /* ---------- 3. Offer pages (IFZA, Dubai licence, Saudi visa): same flow ---------- */
+  var OF = {
+    ifzaDemo: {
+      ar: { tab: 'elharmawy.com/ifza', label: 'عرض طلب رخصة IFZA', steps: ['الباقة', 'الأوراق', 'ابعت', 'تابع'], title: 'رخصة IFZA في دبي', sub: 'اختار باقتك، وإحنا نتابع معاك على الواتساب.',
+        svc: ['رخصة فقط', 'رخصة + إقامة', 'رخصة + إقامتين'], doc: 'النشاط', docv: 'أنشطة تجارية', country: 'عدد الشركاء', countryv: '1',
+        need: 'هتحتاج:', list: ['صورة الجواز', 'صورة شخصية', 'صورة الإقامة أو الفيزا', 'اسمين أو 3 للشركة'],
+        send: 'ابعت الطلب على واتساب', wa: 'السلام عليكم، محتاج رخصة IFZA + إقامتين، نشاط تجاري، شريك واحد.',
+        track: 'تابع معاملتك', tsub: 'اكتب كود الملف اللي بعتناه لك على الواتساب، وشوف معاملتك وصلت لفين.', code: 'HBC-2611-IF', tl: ['استلمنا الأوراق', 'حجز الاسم', 'إصدار الرخصة', 'الإقامة', 'خلصت'], sample: 'مثال توضيحي' },
+      en: { tab: 'elharmawy.com/ifza', label: 'IFZA licence request demo', steps: ['Package', 'Documents', 'Send', 'Track'], title: 'IFZA licence in Dubai', sub: 'Choose your package and we follow up on WhatsApp.',
+        svc: ['Licence only', 'Licence + 1 visa', 'Licence + 2 visas'], doc: 'Activity', docv: 'Trading', country: 'Partners', countryv: '1',
+        need: 'You will need:', list: ['Passport copy', 'Personal photo', 'Residence or visit visa copy', '2 or 3 company names'],
+        send: 'Send request on WhatsApp', wa: 'Hello, I need an IFZA licence with 2 visas, trading activity, one partner.',
+        track: 'Track your file', tsub: 'Enter the file code we sent you on WhatsApp to see where your transaction stands.', code: 'HBC-2611-IF', tl: ['Documents received', 'Name reserved', 'Licence issued', 'Visa', 'Completed'], sample: 'Sample' } },
+    dxbDemo: {
+      ar: { tab: 'elharmawy.com/dubai-trade-licence', label: 'عرض طلب رخصة دبي التجارية', steps: ['النشاط', 'الأوراق', 'ابعت', 'تابع'], title: 'رخصة تجارية في دبي', sub: 'اختار نشاطك، وإحنا نتابع معاك على الواتساب.',
+        svc: ['تجارة إلكترونية', 'نون وأمازون', 'نشاط تاني'], doc: 'النشاط', docv: 'تجارة إلكترونية', country: 'الجنسية', countryv: 'مصر',
+        need: 'هتحتاج:', list: ['صورة الجواز', 'صورة الهوية الإماراتية', 'صورة شخصية', 'اسم مقترح للرخصة'],
+        send: 'ابعت الطلب على واتساب', wa: 'السلام عليكم، محتاج رخصة تجارية في دبي بنشاط تجارة إلكترونية.',
+        track: 'تابع معاملتك', tsub: 'اكتب كود الملف اللي بعتناه لك على الواتساب، وشوف معاملتك وصلت لفين.', code: 'HBC-2611-DL', tl: ['استلمنا الأوراق', 'اختيار النشاط', 'الطلب اتقدّم', 'الرخصة صدرت', 'خلصت'], sample: 'مثال توضيحي' },
+      en: { tab: 'elharmawy.com/dubai-trade-licence', label: 'Dubai trade licence request demo', steps: ['Activity', 'Documents', 'Send', 'Track'], title: 'Dubai commercial licence', sub: 'Choose your activity and we follow up on WhatsApp.',
+        svc: ['E-commerce', 'Noon & Amazon', 'Other activity'], doc: 'Activity', docv: 'E-commerce', country: 'Nationality', countryv: 'Egypt',
+        need: 'You will need:', list: ['Passport copy', 'Emirates ID copy', 'Personal photo', 'A proposed trade name'],
+        send: 'Send request on WhatsApp', wa: 'Hello, I need a Dubai commercial licence for e-commerce.',
+        track: 'Track your file', tsub: 'Enter the file code we sent you on WhatsApp to see where your transaction stands.', code: 'HBC-2611-DL', tl: ['Documents received', 'Activity chosen', 'Submitted', 'Licence issued', 'Completed'], sample: 'Sample' } },
+    ksaDemo: {
+      ar: { tab: 'elharmawy.com/saudi-visa', label: 'عرض طلب تأشيرة السعودية', steps: ['الطلب', 'الأوراق', 'ابعت', 'تابع'], title: 'تأشيرة السعودية متعددة الدخول', sub: 'لمقيمي دول الخليج، بالتعاون مع أمجاد للسياحة.',
+        svc: ['شخص واحد', 'شخصين', 'عيلة'], doc: 'الإمارة', docv: 'الشارقة', country: 'الجنسية', countryv: 'مصر',
+        need: 'هتحتاج:', list: ['صورة الجواز', 'صورة شخصية', 'صورة الإقامة', 'صورة الهوية الإماراتية'],
+        send: 'ابعت الطلب على واتساب', wa: 'السلام عليكم، محتاج تأشيرة السعودية لعيلة، الجنسية مصري، مقيم في الشارقة.',
+        track: 'تابع معاملتك', tsub: 'اكتب كود الملف اللي بعتناه لك على الواتساب، وشوف معاملتك وصلت لفين.', code: 'HBC-2611-SV', tl: ['استلمنا الأوراق', 'الطلب اتقدّم', 'قيد المراجعة', 'التأشيرة صدرت', 'خلصت'], sample: 'مثال توضيحي' },
+      en: { tab: 'elharmawy.com/saudi-visa', label: 'Saudi visa request demo', steps: ['Request', 'Documents', 'Send', 'Track'], title: 'Saudi multiple-entry visa', sub: 'For GCC residents, in partnership with Amjad Tourism.',
+        svc: ['One person', 'Two people', 'Family'], doc: 'Emirate', docv: 'Sharjah', country: 'Nationality', countryv: 'Egypt',
+        need: 'You will need:', list: ['Passport copy', 'Personal photo', 'Residence visa copy', 'Emirates ID copy'],
+        send: 'Send request on WhatsApp', wa: 'Hello, I need a Saudi visa for my family, Egyptian, living in Sharjah.',
+        track: 'Track your file', tsub: 'Enter the file code we sent you on WhatsApp to see where your transaction stands.', code: 'HBC-2611-SV', tl: ['Documents received', 'Submitted', 'Under review', 'Visa issued', 'Completed'], sample: 'Sample' } }
+  };
+
   function mountAll() {
     var lang = site && site.getAttribute('dir') === 'rtl' ? 'ar' : 'en';
-    [['attestDemo', buildAttest], ['trackDemo', buildTrack]].forEach(function (p) {
+    var list = [['attestDemo', buildAttest], ['trackDemo', buildTrack]];
+    Object.keys(OF).forEach(function (id) { list.push([id, function (l) { return buildAttest(l, OF[id]); }]); });
+    list.forEach(function (p) {
       var el = document.getElementById(p[0]); if (!el || el.dataset.lang === lang) return;
       if (el.hbcDemo) el.hbcDemo.destroy();
       var b = p[1](lang); el.dataset.lang = lang;
