@@ -748,3 +748,17 @@ footer.legal .pay { display: flex; flex-wrap: wrap; gap: 10px; align-items: cent
 .hl-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:center}
 .hl-row>*{min-width:0}
 @media (max-width:860px){.hl-row{grid-template-columns:1fr}.hl-fig{max-width:280px}}
+
+/* Nav fits any laptop: lower-priority links move into "More" (2026-11-14) */
+.nav{min-width:0}
+.nav-more{position:relative;display:none}
+.nav-more summary{list-style:none;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:6px}
+.nav-more summary::-webkit-details-marker{display:none}
+.nav-more summary::after{content:"";width:7px;height:7px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg) translateY(-2px)}
+.nav-more-list{position:absolute;top:calc(100% + 12px);inset-inline-end:0;background:var(--paper,#fff);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -18px rgba(1,31,67,.35);padding:8px;display:grid;min-width:200px;z-index:60}
+.nav-more-list a{padding:9px 12px;border-radius:8px;display:none}
+.nav-more-list a:hover{background:#EEF1F5}
+@media (max-width:1680px){.nav>a[href="#solutions"],.nav>a[href="#videos"],.nav>a[href="#about"]{display:none}.nav-more{display:block}.nav-more a[href="#solutions"],.nav-more a[href="#videos"],.nav-more a[href="#about"]{display:block}}
+@media (max-width:1440px){.nav>a[href="#process"],.nav>a[href="pay"],.nav>a[href="track"]{display:none}.nav-more a[href="#process"],.nav-more a[href="pay"],.nav-more a[href="track"]{display:block}}
+@media (max-width:1240px){.nav>a[href="#faq"],.nav>a[href="guides/"]{display:none}.nav-more a[href="#faq"],.nav-more a[href="guides/"]{display:block}}
+@media (max-width:820px){.nav-more{display:none}}
