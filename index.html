@@ -34,18 +34,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css?v=20261114c">
+<link rel="stylesheet" href="site.css?v=20261114d">
 <link rel="stylesheet" href="vendor/hd.css?v=1">
 
 </head>
 <body>
 <div class="site" id="site" dir="rtl" lang="ar">
 <div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-grid"></div>
   <div class="intro-stage">
     <img class="intro-mark" src="intro-mark.png" alt="">
     <div class="intro-line"></div>
     <div class="intro-word"><img src="intro-word.png" alt=""></div>
-    <div class="intro-slogan">We Handle It, You Grow</div>
+    <div class="intro-slogan"><span><i>We</i></span> <span><i>Handle</i></span> <span><i>It,</i></span> <span><i>You</i></span> <span><i>Grow</i></span></div>
+    <div class="intro-figs">
+      <figure><div class="ifig" data-hl="cabinet" data-hl-theme="dark"></div><figcaption>تأسيس الشركات<small>Company setup</small></figcaption></figure>
+      <figure><div class="ifig" data-hl="vault" data-hl-theme="dark"></div><figcaption>الحسابات والبنوك<small>Banking &amp; accounts</small></figcaption></figure>
+      <figure><div class="ifig" data-hl="branches" data-hl-theme="dark"></div><figcaption>المعاملات الحكومية<small>Government services</small></figcaption></figure>
+    </div>
   </div>
   <button class="intro-skip" id="introSkip" type="button" aria-label="Skip intro">Skip ›</button>
 </div>
@@ -994,7 +1000,7 @@
     el.classList.add('play');
     document.getElementById('introSkip').addEventListener('click', end);
     el.addEventListener('click', end);
-    setTimeout(end, 2500);
+    setTimeout(end, 2900);
   })();
   /* ---------- promo buttons preselect service ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.promo-btn, .vz-link'), function (b) {
@@ -1233,7 +1239,7 @@ document.querySelectorAll('.vframe').forEach(function(f){
 <script src="ask-demo.js?v=1" defer></script>
 <script type="module">
 import * as H from "./vendor/hairline.js?v=1";
-const io=new IntersectionObserver((es)=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const f=H[e.target.dataset.hl];if(f){try{f(e.target,{play:true,intensity:.6,theme:"light"})}catch(err){}}}},{rootMargin:"200px"});
+const io=new IntersectionObserver((es)=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const f=H[e.target.dataset.hl];if(f){try{f(e.target,{play:true,intensity:.6,theme:e.target.dataset.hlTheme||"light"})}catch(err){}}}},{rootMargin:"200px"});
 document.querySelectorAll("[data-hl]").forEach((el)=>io.observe(el));
 </script>
 <script>document.addEventListener("click",function(e){var d=document.querySelector(".nav-more");if(d&&d.open&&(!d.contains(e.target)||e.target.closest("a")))d.open=false;});</script>
