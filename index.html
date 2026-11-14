@@ -34,7 +34,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@600;700;800&family=Red+Hat+Text:wght@400;500;600&family=Tajawal:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="site.css?v=20261112b">
+<link rel="stylesheet" href="site.css?v=20261114">
+<link rel="stylesheet" href="vendor/hd.css?v=1">
 
 </head>
 <body>
@@ -454,12 +455,12 @@
         <div class="eyebrow"><span data-l="en">How we work</span><span data-l="ar">طريقة عملنا</span></div>
         <h2><span data-l="en">From first call to finished work</span><span data-l="ar">من أول مكالمة حتى تسليم العمل</span></h2>
       </div>
-      <ol class="steps reveal">
+      <div class="hl-row"><ol class="steps reveal">
         <li><h3><span data-l="en">Listen</span><span data-l="ar">نسمعك</span></h3><p><span data-l="en">A first call to understand your business and what you need.</span><span data-l="ar">مكالمة أولى لنفهم نشاطك واحتياجك.</span></p></li>
         <li><h3><span data-l="en">Propose</span><span data-l="ar">نقترح</span></h3><p><span data-l="en">A written scope, timeline and quote before any work starts.</span><span data-l="ar">نطاق عمل وجدول زمني وعرض سعر مكتوب قبل البدء.</span></p></li>
         <li><h3><span data-l="en">Deliver</span><span data-l="ar">ننفّذ</span></h3><p><span data-l="en">We do the work and keep you updated at every step.</span><span data-l="ar">ننفّذ العمل ونطلعك على كل خطوة.</span></p></li>
         <li><h3><span data-l="en">Follow up</span><span data-l="ar">نتابع</span></h3><p><span data-l="en">We check the results with you and adjust what needs adjusting.</span><span data-l="ar">نراجع النتائج معك ونعدّل ما يحتاج تعديلًا.</span></p></li>
-      </ol>
+      </ol><div class="hl-fig" data-hl="branches" aria-hidden="true"></div></div>
     </div>
   </section>
 
@@ -615,6 +616,19 @@
 
 
 
+  <section class="block ask-demo" id="ask-demo">
+    <div class="wrap demo-grid">
+      <div>
+        <div class="eyebrow"><span data-l="en">Website assistant</span><span data-l="ar">المساعد الذكي</span></div>
+        <h2><span data-l="en">Ask us anything, any time</span><span data-l="ar">اسأل أي سؤال، في أي وقت</span></h2>
+        <p><span data-l="en">Our assistant answers questions about company setup, government fees and paperwork in Arabic or English, then hands you to our team on WhatsApp for a written quote.</span><span data-l="ar">المساعد بيرد على أسئلة التأسيس والرسوم الحكومية والأوراق بالعربي أو الإنجليزي، وبعدين يوصّلك بفريقنا على واتساب لعرض سعر مكتوب.</span></p>
+        <ul class="demo-pts"><li><span data-l="en">Official fees from the authorities, with the source</span><span data-l="ar">الرسوم الرسمية من الجهات، ومعاها المصدر</span></li><li><span data-l="en">Two assistants: Zatouna and Lilia</span><span data-l="ar">مساعدين اتنين: زتونة وليليا</span></li><li><span data-l="en">Our team confirms every price</span><span data-l="ar">فريقنا بيأكد كل سعر</span></li></ul>
+        <button type="button" class="btn btn-gold" onclick="var f=document.getElementById('aiFab');if(f&&!f.hidden){f.click()}else{location.href='https://wa.me/971563469000'}"><span data-l="en">Ask the assistant</span><span data-l="ar">اسأل المساعد</span></button>
+      </div>
+      <div id="askDemo" class="reveal"></div>
+    </div>
+  </section>
+
   <section class="block tools-home" id="tools">
     <div class="wrap">
       <div class="head"><div class="eyebrow"><span data-l="en">Free tools</span><span data-l="ar">أدوات مجانية</span></div><h2><span data-l="en">Tools for your company</span><span data-l="ar">أدوات لشركتك</span></h2></div>
@@ -623,10 +637,10 @@
   </section>
   <section class="block guides-home" id="guides">
     <div class="wrap">
-      <div class="head">
+      <div class="hl-row"><div><div class="head">
         <div class="eyebrow"><span data-l="en">Guides</span><span data-l="ar">أدلة</span></div>
         <h2><span data-l="en">Know the real cost before you start</span><span data-l="ar">اعرف التكلفة الحقيقية قبل ما تبدأ</span></h2>
-      </div>
+      </div></div><div class="hl-fig" data-hl="cabinet" aria-hidden="true" style="max-width:240px"></div></div>
       <div class="g-list">
         <a class="g-card" href="guides/meydan-vs-ifza"><b><span data-l="en">Meydan or IFZA: which Dubai free zone suits you?</span><span data-l="ar">ميدان ولا إيفزا: أنهي منطقة حرة في دبي تناسبك؟</span></b><span><span data-l="en">Location, prices, activities and who each one fits.</span><span data-l="ar">المكان والأسعار والأنشطة وكل واحدة تناسب مين.</span></span><i><span data-l="en">Read the guide →</span><span data-l="ar">اقرأ الدليل ←</span></i></a>
         <a class="g-card" href="guides/uae-company-setup-cost"><b><span data-l="en">How much does it cost to set up a company in the UAE in 2026?</span><span data-l="ar">تأسيس شركة في الإمارات 2026… بيتكلف كام؟</span></b><span><span data-l="en">Real prices for Ajman, SHAMS and Meydan, and the costs people forget.</span><span data-l="ar">أسعار حقيقية لعجمان وشمس وميدان، والتكاليف اللي ناس بتنساها.</span></span><i><span data-l="en">Read the guide →</span><span data-l="ar">اقرأ الدليل ←</span></i></a>
@@ -1214,6 +1228,13 @@ document.querySelectorAll('.vframe').forEach(function(f){
   $('langBtn').addEventListener('click',function(){ setTimeout(function(){ labels(); if(step===4) render(); },0); });
   fillVisas(); $('sc-visas').value='1'; show(1);
 })();
+</script>
+<script src="vendor/hd.js?v=1" defer></script>
+<script src="ask-demo.js?v=1" defer></script>
+<script type="module">
+import * as H from "./vendor/hairline.js?v=1";
+const io=new IntersectionObserver((es)=>{for(const e of es){if(!e.isIntersecting)continue;io.unobserve(e.target);const f=H[e.target.dataset.hl];if(f){try{f(e.target,{play:true,intensity:.6,theme:"light"})}catch(err){}}}},{rootMargin:"200px"});
+document.querySelectorAll("[data-hl]").forEach((el)=>io.observe(el));
 </script>
 </body>
 </html>
