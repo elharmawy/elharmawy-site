@@ -1,10 +1,16 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>xfer</title></head><body>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>xfer</title>
+<style>body{font-family:sans-serif;display:grid;place-items:center;height:100vh;margin:0}button{font-size:28px;padding:30px 60px}</style></head><body>
+<button id="b">COPY IMAGE</button><p id="s"></p>
 <script>
-(async () => {
-  const f = new URLSearchParams(location.search).get('f') || 'saeed-post.jpg';
-  const r = await fetch('/img/' + f.replace(/[^a-z0-9.\-]/gi, ''));
-  const b = await r.blob();
-  if (window.opener) window.opener.postMessage({ xferName: f, xferBlob: b }, '*');
-  document.body.textContent = 'sent ' + b.size;
-})();
+const f = (new URLSearchParams(location.search).get('f') || 'saeed-post.jpg').replace(/[^a-z0-9.\-]/gi, '');
+document.getElementById('b').onclick = async () => {
+  try {
+    const img = new Image(); img.src = '/img/' + f; await img.decode();
+    const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+    c.getContext('2d').drawImage(img, 0, 0);
+    const png = await new Promise(r => c.toBlob(r, 'image/png'));
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': png })]);
+    document.getElementById('s').textContent = 'copied ' + png.size;
+  } catch (e) { document.getElementById('s').textContent = 'error ' + e.message; }
+};
 </script></body></html>
