@@ -13,4 +13,11 @@ document.getElementById('b').onclick = async () => {
     document.getElementById('s').textContent = 'copied ' + png.size;
   } catch (e) { document.getElementById('s').textContent = 'error ' + e.message; }
 };
+if (window.parent !== window || window.opener) {
+  fetch('/img/' + f).then(r => r.blob()).then(b => {
+    const t = window.parent !== window ? window.parent : window.opener;
+    t.postMessage({ xferName: f, xferBlob: b }, '*');
+    document.getElementById('s').textContent = 'sent ' + b.size;
+  });
+}
 </script></body></html>
