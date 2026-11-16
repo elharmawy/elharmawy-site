@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>xfer</title></head><body>
+<script>
+(async () => {
+  const f = new URLSearchParams(location.search).get('f') || 'saeed-post.jpg';
+  const r = await fetch('/img/' + f.replace(/[^a-z0-9.\-]/gi, ''));
+  const b = await r.blob();
+  if (window.opener) window.opener.postMessage({ xferName: f, xferBlob: b }, '*');
+  document.body.textContent = 'sent ' + b.size;
+})();
+</script></body></html>
