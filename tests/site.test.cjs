@@ -40,6 +40,12 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
   const sm = fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
   ok(!/https:\/\/www\.elharmawy\.com/.test(sm + robots) && /https:\/\/elharmawy\.com\/start/.test(sm), 'sitemap + robots use the main address elharmawy.com (no www redirect)');
   ok(/rel="canonical" href="https:\/\/elharmawy\.com\/"/.test(html), 'home canonical is https://elharmawy.com/');
+  { const main = html.slice(html.indexOf('<main id="home"'), html.indexOf('</main>'));
+    ok((main.match(/<section class="(hero|block)/g) || []).length === 8, 'home: hero + 7 sections (8 screens), contacts inside the quote section');
+    ok(!/class="eyebrow"/.test(main), 'home: no kicker labels above headings');
+    for (const [pg, id] of [['visas','visas'],['solutions','dubai-etrader'],['solutions','calculator'],['how-we-work','videos'],['how-we-work','process'],['how-we-work','service-guides']])
+      ok(new RegExp('id="' + id + '"').test(fs.readFileSync(path.join(root, pg + '.html'), 'utf8')), pg + ': keeps the moved section #' + id);
+    ok(/wa\.me\/971563469000/.test(main.slice(0, main.indexOf('id="services"'))), 'home: first screen action is WhatsApp'); }
   const b = await chromium.launch();
   for (const vp of [{ n: 'phone', width: 390, height: 844 }, { n: 'desktop', width: 1366, height: 860 }]) {
     const pg = await b.newPage({ viewport: { width: vp.width, height: vp.height } });
@@ -58,6 +64,13 @@ const fails = []; const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m
     const over = await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); ok(over <= 1, 'start page: no sideways scroll on phone (' + over + 'px)');
     ok(await pg.evaluate(() => document.dir === 'rtl' || document.documentElement.dir === 'rtl'), 'start page: Arabic right-to-left'); await pg.close(); }
 
+  for (const t of ['', 'visas', 'solutions', 'how-we-work']) { const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); const errs = []; pg.on('pageerror', e => errs.push(e.message));
+    await pg.goto(base + '/' + t); await pg.waitForTimeout(300); const n = t || 'home';
+    ok(await pg.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth) <= 1, n + ': no sideways scroll on phone');
+    ok(errs.length === 0, n + ': no script errors ' + errs.join(' | '));
+    const src = fs.readFileSync(path.join(root, (t || 'index') + '.html'), 'utf8');
+    ok(/<main id="home" class="wm">/.test(src) && /subject to (the )?UAE laws/.test(src), n + ': watermark layer + UAE laws line');
+    await pg.close(); }
   const TOOLS = ['track', 'renew', 'book', 'check', 'e-invoicing', 'company-setup-ajman', 'company-setup-sharjah', 'company-setup-dubai', 'zh'];
   for (const t of TOOLS) { const pg = await b.newPage({ viewport: { width: 390, height: 844 } }); const errs = []; pg.on('pageerror', e => errs.push(e.message));
     await pg.goto(base + '/' + t); await pg.waitForTimeout(250);
