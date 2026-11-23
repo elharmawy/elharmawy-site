@@ -26,7 +26,7 @@ button.btn { border: 0; cursor: pointer; }
 .btn-wa { background: #1E9E55; color: #fff; }
 .btn-ghost2 { background: #fff; color: var(--navy); border: 1px solid var(--line); }
 .ok-box { background: #EEF8F1; border: 1px solid #BFE3CB; border-radius: 12px; padding: 18px; }
-.ok-box h3 { color: #145C33; font-size: 19px; margin-bottom: 6px; }
+.ok-box h2, .ok-box h3 { color: #145C33; font-size: 19px; margin-bottom: 6px; }
 .err { color: #A3261B; font-weight: 600; font-size: 14.5px; }
 .law-line { margin-top: 26px; font-size: 13.5px; color: var(--gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 .tbl-wrap { overflow-x: auto; }
