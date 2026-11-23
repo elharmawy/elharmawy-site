@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>How We Work, Videos, Tools &amp; Guides | El Harmawy Business Consultancy</title>
+<title>How We Work, Videos, Tools &amp; Guides | El Harmawy</title>
 <meta name="description" content="From the first call to finished work: our steps, short videos, free tools and guides.">
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1BHSYLT4R"></script>
@@ -336,11 +336,11 @@
 
 
 <button class="ai-fab" id="aiFab" type="button" hidden aria-controls="aiBox" aria-expanded="false">
-  <span class="ai-duo" aria-hidden="true"><img src="img/ai/zatouna.jpg" alt="" width="34" height="34"><img src="img/ai/lilia.jpg" alt="" width="34" height="34"></span>
+  <span class="ai-duo" aria-hidden="true"><img src="img/ai/zatouna.jpg" alt="" width="34" height="34" loading="lazy" decoding="async"><img src="img/ai/lilia.jpg" alt="" width="34" height="34" loading="lazy" decoding="async"></span>
   <span><span data-l="en">Ask Zatouna or Lilia</span><span data-l="ar">اسأل زتونة أو ليليا</span></span>
 </button>
 <section class="ai-box" id="aiBox" hidden aria-label="El Harmawy assistant">
-  <header class="ai-head"><img id="aiAv" src="favicon.png" alt="" width="34" height="34"><div><b id="aiName"><span data-l="en">HBC Assistant</span><span data-l="ar">مساعد الهرماوي</span></b><small><span data-l="en">AI assistant · our team follows up on WhatsApp</span><span data-l="ar">مساعد ذكي · والفريق يتابع معاك على واتساب</span></small></div><button type="button" class="ai-sw" id="aiSw" hidden><span data-l="en">Switch</span><span data-l="ar">بدّل</span></button><button type="button" class="ai-x" id="aiX" aria-label="Close">×</button></header>
+  <header class="ai-head"><img id="aiAv" src="favicon.png" alt="" width="34" height="34" loading="lazy" decoding="async"><div><b id="aiName"><span data-l="en">HBC Assistant</span><span data-l="ar">مساعد الهرماوي</span></b><small><span data-l="en">AI assistant · our team follows up on WhatsApp</span><span data-l="ar">مساعد ذكي · والفريق يتابع معاك على واتساب</span></small></div><button type="button" class="ai-sw" id="aiSw" hidden><span data-l="en">Switch</span><span data-l="ar">بدّل</span></button><button type="button" class="ai-x" id="aiX" aria-label="Close">×</button></header>
   <div class="ai-log" id="aiLog" aria-live="polite"></div>
   <form class="ai-form" id="aiForm"><input id="aiIn" autocomplete="off" maxlength="1200" placeholder="Type your question… / اكتب سؤالك…"><button class="btn btn-gold" type="submit" aria-label="Send">➤</button></form>
   <p class="ai-foot"><span data-l="en">AI can make mistakes. Prices and requirements are confirmed by our team.</span><span data-l="ar">المساعد ممكن يغلط. الأسعار والمتطلبات بيأكدها فريقنا.</span></p>
@@ -391,7 +391,7 @@
   function setWho(k){ who=k; try{ sessionStorage.setItem('hbcWho',k); }catch(e){} var p=P[k]; avEl.src=p.img; avEl.alt=''; nameEl.innerHTML='<span data-l="en">'+p.en+'</span><span data-l="ar">'+p.ar+'</span>'; swEl.hidden=false; form.hidden=false; }
   function pick(){ form.hidden=true; var c=document.createElement('div'); c.className='ai-pick'; var A=ar();
     c.innerHTML='<p>'+(A?'أهلاً بيك في الهرماوي 👋 تحب تكلّم مين؟':'Welcome to El Harmawy 👋 Who would you like to talk to?')+'</p><div class="ai-pick-row"></div>';
-    ['zatouna','lilia'].forEach(function(k){ var p=P[k], b=document.createElement('button'); b.type='button'; b.innerHTML='<img src="'+p.img+'" alt="" width="72" height="72"><b>'+(A?p.ar:p.en)+'</b>'; b.addEventListener('click',function(){ c.remove(); setWho(k); add('bot', A?p.hi_ar:p.hi_en); quick(); inp.focus(); }); c.querySelector('.ai-pick-row').appendChild(b); });
+    ['zatouna','lilia'].forEach(function(k){ var p=P[k], b=document.createElement('button'); b.type='button'; b.innerHTML='<img src="'+p.img+'" alt="" width="72" height="72" loading="lazy" decoding="async"><b>'+(A?p.ar:p.en)+'</b>'; b.addEventListener('click',function(){ c.remove(); setWho(k); add('bot', A?p.hi_ar:p.hi_en); quick(); inp.focus(); }); c.querySelector('.ai-pick-row').appendChild(b); });
     log.appendChild(c); }
   swEl.addEventListener('click',function(){ log.innerHTML=''; hist=[]; save(); leadDone=false; pick(); });
   if(who&&P[who]) setWho(who);
@@ -429,7 +429,7 @@
       <span class="pay-note"><span data-l="en">Pay by card, or split your payment with Tabby or Tamara.</span><span data-l="ar">ادفع بالبطاقة أو قسّط مع تابي أو تمارا.</span></span>
     </div>
     <div class="app-get" id="appGet" hidden>
-      <button type="button" class="app-btn" id="appBtn"><img src="icons/icon-192.png" alt="" width="28" height="28"><span class="app-t"><b>El Harmawy App</b><small>Install on your phone</small></span></button>
+      <button type="button" class="app-btn" id="appBtn"><img src="icons/icon-192.png" alt="" width="28" height="28" loading="lazy" decoding="async"><span class="app-t"><b>El Harmawy App</b><small>Install on your phone</small></span></button>
       <p class="app-ios" id="appIos" hidden><span data-l="en">On iPhone: tap the Share button, then “Add to Home Screen”.</span><span data-l="ar">على الآيفون: دوس زرار المشاركة وبعدين «إضافة إلى الشاشة الرئيسية».</span></p>
     </div>
     <div class="links">
